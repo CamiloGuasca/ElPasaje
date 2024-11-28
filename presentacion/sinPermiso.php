@@ -1,0 +1,1 @@
+<h1>Su rol no tiene permiso para ingresar a este sitio</h1>
