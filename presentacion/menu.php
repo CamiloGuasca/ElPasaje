@@ -27,6 +27,10 @@
 						</ul></li>
 			</ul>
 			<ul class="navbar-nav">
+				<li class="nav-item"><a href="?pid=<?php echo base64_encode("presentacion/registro.php") ?>" class="nav-link"
+					aria-disabled="true">Registrarse</a></li>
+			</ul>
+			<ul class="navbar-nav">
 				<li class="nav-item"><a href="?pid=<?php echo base64_encode("presentacion/iniciarSesion.php") ?>" class="nav-link"
 					aria-disabled="true">Iniciar Sesion</a></li>
 			</ul>

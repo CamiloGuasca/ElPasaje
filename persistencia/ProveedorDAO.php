@@ -1,20 +1,6 @@
 <?php
-    class ProveedorDAO{
-        private $idProv;
-        private $nombreProv;
-        private $naciProv;
-        private $correoProv;
-        private $claveProv;
-        private $cedulaProv;
-    
-        public function __construct($idProv = null, $nombreProv = null, $naciProv = null, $correoProv = null, $claveProv = null, $cedulaProv = null) {
-            $this->idProv = $idProv;
-            $this->nombreProv = $nombreProv;
-            $this->naciProv = $naciProv;
-            $this->correoProv = $correoProv;
-            $this->claveProv = $claveProv;
-            $this->cedulaProv = $cedulaProv;
-        }
+require_once("./logica/Persona.php");
+    class ProveedorDAO extends Persona{
         public function consTod(){
             return "SELECT
                         idProv,
@@ -27,6 +13,18 @@
                         proveedores
             ";
         }
+        public function registro(){
+            return "INSERT INTO 
+                        proveedores (nombreProv, naciProv, correoProv, claveProv, cedulaProv)
+                    VALUES
+                        ('".$this -> nombrePersona."',
+                         '".$this -> naciPersona."',
+                         '".$this -> correoPersona."',
+                         '".$this -> clavePersona."',
+                         '".$this -> cedulaPersona."')
+            ";
+
+        }
         public function consId(){
             return "SELECT
                         nombreProv,
@@ -37,7 +35,7 @@
                     FROM
                         proveedores
                     WHERE
-                        idProv = ".$this -> idProv."
+                        idProv = ".$this -> getIdPersona()."
             ";
         }
     }

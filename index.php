@@ -6,7 +6,7 @@ if(isset($_GET["cerrarSesion"])){
 require("logica/Evento.php");
 $paginasSinSesion = array(
     "presentacion/iniciarSesion.php",
-    "presentacion/cliente/registrarCliente.php",
+    "presentacion/registro.php",
     "presentacion/sinPermiso.php",
 );
 

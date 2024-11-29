@@ -22,8 +22,8 @@
             echo "<a href='#'>" . $eventoActual->getNombreEve() . "</a><br>";
             echo "Fecha: " . $eventoActual->getFechFinEve() . "<br>";
             echo "Valor: $" . $eventoActual->getPrecioEve() . "<br>";
-            echo "Lugar: " . $eventoActual->getIdLug() -> getNombreLug(). "<br>";
-            echo "Proveedor: " . $eventoActual->getDProv() -> getNombreProv(). "<br>";
+            echo "Lugar: " . $eventoActual-> getIdLug() -> getNombreLug(). "<br>";
+            echo "Proveedor: " . $eventoActual->getDProv() -> getNombrePersona(). "<br>";
             echo "</div>";
             echo "</div>";
             echo "</div>";
