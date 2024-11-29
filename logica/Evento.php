@@ -1,6 +1,8 @@
 <?php
 require_once("./persistencia/Conexion.php");
 require("./persistencia/EventoDAO.php");
+require("Lugar.php");
+require("Proveedor.php");
 class Evento {
     private $idEve;
     private $nombreEve;
@@ -94,7 +96,11 @@ class Evento {
         $eventoDAO = new eventoDAO();
         $conexion -> ejecutarConsulta($eventoDAO -> consTod());
         while ($registro = $conexion -> siguienteRegistro()) {
-            $evento = new Evento($registro[0], $registro[1], $registro[2], $registro[3], $registro[4], $registro[5], $registro[6], $registro[7]);
+            $lugar = new Lugar($registro[6]);
+            $lugar = $lugar->consId();
+            $proveedor = new Proveedor($registro[7]);
+            $proveedor = $proveedor->consId();
+            $evento = new Evento($registro[0], $registro[1], $registro[2], $registro[3], $registro[4], $registro[5], $lugar, $proveedor);
             array_push($eventos, $evento);
         }
         return $eventos;
