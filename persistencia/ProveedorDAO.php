@@ -12,6 +12,14 @@ require_once("./logica/Persona.php");
                     FROM
                         proveedores
             ";
+            }   
+        public function autenticar(){
+            return "SELECT 
+                        idProv
+                    FROM
+                        proveedores 
+                    WHERE 
+                        correoProv = '" . $this -> correoPersona. "' and claveProv= '" . $this -> clavePersona . "'";
         }
         public function registro(){
             return "INSERT INTO 

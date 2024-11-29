@@ -20,7 +20,22 @@
             }
             return $proveedores;
         }
-
+        public function autenticar(){
+            $conexion = new Conexion();
+            $conexion -> abrirConexion();
+            $proveedorDAO = new ProveedorDAO(null, null, null, $this -> correoPersona, $this -> clavePersona, null);
+            $conexion -> ejecutarConsulta($proveedorDAO -> autenticar());
+            echo $proveedorDAO -> autenticar();
+            if($conexion -> numeroFilas() == 0){
+                $conexion -> cerrarConexion();
+                return false;
+            }else{
+                $registro = $conexion -> siguienteRegistro();
+                $this -> idPersona = $registro[0];
+                $conexion -> cerrarConexion();
+                return true;
+            }
+        }
         public function registro(){
             $conexion = new Conexion();
             $conexion -> abrirConexion();

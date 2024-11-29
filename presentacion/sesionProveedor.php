@@ -1,7 +1,7 @@
 <?php
 $id = $_SESSION["id"];
 $rol = $_SESSION["rol"];
-if($rol != "cliente"){
+if($rol != "proveedor"){
     header("Location: ?pid=" . base64_encode("presentacion/sinPermiso.php"));
 }
 $cliente = new Cliente($id);

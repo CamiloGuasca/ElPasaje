@@ -13,6 +13,7 @@ $paginasSinSesion = array(
 $paginasConSesion = array(
     "presentacion/sesionAdministrador.php",
     "presentacion/sesionCliente.php",
+    "presentacion/sesionProveedor.php",
     "presentacion/producto/buscarProducto.php"
 );
 

@@ -1,16 +1,17 @@
 <?php
+require("./logica/Cliente.php");
 $error = false;
 if (isset($_POST["registrar"])) {      
     if($_POST["tipo"] == "cliente"){
-        //$cliente = new Cliente(null, $_POST["nombre"], $_POST["apellido"], $_POST["correo"], md5($_POST["clave"]));
-       //$cliente -> registrar();
+    	$cliente = new Cliente(null, $_POST["nombre"], $_POST["nacimiento"], $_POST["correo"], md5($_POST["clave"]), $_POST["cedula"]);
+       	$cliente -> registro();
     }else{
         $proveedor = new Proveedor(null, $_POST["nombre"], $_POST["nacimiento"], $_POST["correo"], md5($_POST["clave"]), $_POST["cedula"]);
         $proveedor -> registro();
     }
 }
 include ("presentacion/encabezado.php")?>
-<div class="container">
+<div class="container mb-5">
 	<div class="row mt-5">
 		<div class="col-4"></div>
 		<div class="col-4">
