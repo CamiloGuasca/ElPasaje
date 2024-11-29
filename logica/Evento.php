@@ -7,71 +7,82 @@ class Evento {
     private $fechIniEve;
     private $fechFinEve;
     private $precioEve;
-    private $Lugares_idLug;
     private $imagenEve;
+    private $idLug;
+    private $dProv;
 
-    public function __construct($idEve = null, $nombreEve = null, $fechIniEve = null, $fechFinEve = null, $precioEve = null, $Lugares_idLug = null, $imagenEve = null) {
+    // Constructor
+    public function __construct($idEve = null, $nombreEve = null, $fechIniEve = null, $fechFinEve = null, $precioEve = null, $imagenEve = null, $idLug = null, $dProv = null) {
         $this->idEve = $idEve;
         $this->nombreEve = $nombreEve;
         $this->fechIniEve = $fechIniEve;
         $this->fechFinEve = $fechFinEve;
         $this->precioEve = $precioEve;
-        $this->Lugares_idLug = $Lugares_idLug;
         $this->imagenEve = $imagenEve;
+        $this->idLug = $idLug;
+        $this->dProv = $dProv;
     }
 
+    // Getters
     public function getIdEve() {
         return $this->idEve;
-    }
-
-    public function setIdEve($idEve) {
-        $this->idEve = $idEve;
     }
 
     public function getNombreEve() {
         return $this->nombreEve;
     }
 
-    public function setNombreEve($nombreEve) {
-        $this->nombreEve = $nombreEve;
-    }
-
     public function getFechIniEve() {
         return $this->fechIniEve;
-    }
-
-    public function setFechIniEve($fechIniEve) {
-        $this->fechIniEve = $fechIniEve;
     }
 
     public function getFechFinEve() {
         return $this->fechFinEve;
     }
 
-    public function setFechFinEve($fechFinEve) {
-        $this->fechFinEve = $fechFinEve;
-    }
-
     public function getPrecioEve() {
         return $this->precioEve;
-    }
-
-    public function setPrecioEve($precioEve) {
-        $this->precioEve = $precioEve;
-    }
-
-    public function getLugaresIdLug() {
-        return $this->Lugares_idLug;
-    }
-
-    public function setLugaresIdLug($Lugares_idLug) {
-        $this->Lugares_idLug = $Lugares_idLug;
     }
 
     public function getImagenEve() {
         return $this->imagenEve;
     }
 
+    public function getIdLug() {
+        return $this->idLug;
+    }
+
+    public function getDProv() {
+        return $this->dProv;
+    }
+
+    // Setters
+    public function setIdEve($idEve) {
+        $this->idEve = $idEve;
+    }
+
+    public function setNombreEve($nombreEve) {
+        $this->nombreEve = $nombreEve;
+    }
+
+    public function setFechIniEve($fechIniEve) {
+        $this->fechIniEve = $fechIniEve;
+    }
+
+    public function setFechFinEve($fechFinEve) {
+        $this->fechFinEve = $fechFinEve;
+    }
+
+    public function setPrecioEve($precioEve) {
+        $this->precioEve = $precioEve;
+    }
+    public function setIdLug($idLug) {
+        $this->idLug = $idLug;
+    }
+
+    public function setDProv($dProv) {
+        $this->dProv = $dProv;
+    }
     public function setImagenEve($imagenEve) {
         $this->imagenEve = $imagenEve;
     }
@@ -83,7 +94,7 @@ class Evento {
         $eventoDAO = new eventoDAO();
         $conexion -> ejecutarConsulta($eventoDAO -> consTod());
         while ($registro = $conexion -> siguienteRegistro()) {
-            $evento = new Evento($registro[0], $registro[1], $registro[2], $registro[3], $registro[4], $registro[5], $registro[6]);
+            $evento = new Evento($registro[0], $registro[1], $registro[2], $registro[3], $registro[4], $registro[5], $registro[6], $registro[7]);
             array_push($eventos, $evento);
         }
         return $eventos;
