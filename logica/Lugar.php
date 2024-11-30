@@ -63,9 +63,8 @@ class Lugar {
         $lugarDAO = new LugarDAO(); 
         $conexion -> ejecutarConsulta($lugarDAO -> consTod());
         while($registro = $conexion -> siguienteRegistro()){
-            $ciudad = new Ciudad($registro[3]);
+            $ciudad = new Ciudad($registro[4]);
             $ciudad = $ciudad -> consId();
-
             $lugar = new Lugar($registro[0], $registro[1], $registro[2], $registro[3], $ciudad);
             array_push($lugares, $lugar);
         }
@@ -79,7 +78,7 @@ class Lugar {
         $registro = $conexion -> siguienteRegistro();
         $ciudad = new Ciudad($registro[3]);
         $ciudad = $ciudad -> consId();
-        $lugar = new Lugar($lugarDAO -> consId(),$registro[0], $registro[1], $registro[2], $ciudad);
+        $lugar = new Lugar($this->idLug,$registro[0], $registro[1], $registro[2], $ciudad);
         return $lugar;
     }
 }

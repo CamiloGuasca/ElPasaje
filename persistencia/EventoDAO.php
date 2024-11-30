@@ -28,5 +28,20 @@
                         Eventos
                     ";
         }
+        public function consIdProv(){
+            return"SELECT
+                        idEve, 
+                        nombreEve, 
+                        fechIniEve, 
+                        fechFinEve, 
+                        precioEve, 
+                        imagenEve, 
+                        idLug
+                   FROM
+                        eventos
+                   WHERE
+                        dProv = ".$this -> dProv."
+            ";      
+        }
     }
 ?>

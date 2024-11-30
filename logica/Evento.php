@@ -105,5 +105,22 @@ class Evento {
         }
         return $eventos;
     }
+    
+    public function consIdProv(){
+        $eventos = array();
+        $conexion = new Conexion();
+        $conexion -> abrirConexion();
+        $eventoDAO = new EventoDAO(null,null,null,null,null,null,null,$this->dProv);
+        $conexion -> ejecutarConsulta($eventoDAO -> consIdProv());
+        while ($registro = $conexion -> siguienteRegistro()) {
+            $lugar = new Lugar($registro[6]);
+            $lugar = $lugar->consId();
+            $proveedor = new Proveedor($this -> dProv);
+            $proveedor = $proveedor->consId();
+            $evento = new Evento($registro[0], $registro[1], $registro[2], $registro[3], $registro[4], $registro[5], $lugar, $proveedor);
+            array_push($eventos, $evento);
+        }
+        return $eventos;
+    }
 }
 ?>

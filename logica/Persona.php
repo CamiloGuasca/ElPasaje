@@ -1,5 +1,5 @@
 <?php
-require_once("./persistencia/Conexion.php");
+
 //require("./persistencia/ProveedorDAO.php");
 class Persona{
     protected $idPersona;

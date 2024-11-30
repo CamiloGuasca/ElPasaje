@@ -1,7 +1,7 @@
 <?php
     require_once("./persistencia/Conexion.php");
-    require("./persistencia/ProveedorDAO.php");
     require_once("Persona.php");
+    require_once("./persistencia/ProveedorDAO.php");
     class Proveedor extends Persona{
 
         public function __construct($idPersona = null, $nombrePersona = null, $naciPersona = null, $correoPersona = null, $clavePersona = null, $cedulaPersona = null) {
