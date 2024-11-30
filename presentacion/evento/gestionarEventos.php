@@ -54,7 +54,8 @@
                                         data-fechinieve='".$evento->getFechIniEve()."'
                                         data-fechfineve='".$evento->getFechFinEve()."'
                                         data-precioeve='".$evento->getPrecioEve()."'
-                                        data-lugarid='".$evento->getIdLug()->getIdLug()."'>
+                                        data-lugarid='".$evento->getIdLug()->getIdLug()."'
+                                        data-imagen='/uploads/eventos/".$evento->getImagenEve()."'>
                                     <i class='fas fa-pencil-alt'></i>
                                 </button>
                                 <button type='button' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#staticBackdrop'>
@@ -110,6 +111,9 @@
                             ?>
                             </select>
                         </div>
+                        <div class="text-center mb-3">
+                            <img id="modalImage" src="" alt="Imagen del Evento" class="img-fluid">
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -141,6 +145,7 @@
                 var precioEve = button.data('precioeve');
                 var idLug = button.data('lugarid');
                 var dProv = button.data('dProv');
+                var imagen = button.data('imagen'); 
                 
 
                 // Rellenar los campos del formulario en el modal con los datos extraídos
