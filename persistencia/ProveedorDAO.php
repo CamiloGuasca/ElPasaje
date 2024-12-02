@@ -23,7 +23,12 @@ require_once("./logica/Persona.php");
         }
         public function registro(){
             return "INSERT INTO 
-                        proveedores (nombreProv, naciProv, correoProv, claveProv, cedulaProv)
+                        proveedores 
+                        (nombreProv, 
+                        naciProv, 
+                        correoProv, 
+                        claveProv, 
+                        cedulaProv)
                     VALUES
                         ('".$this -> nombrePersona."',
                          '".$this -> naciPersona."',

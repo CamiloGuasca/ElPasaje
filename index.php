@@ -4,6 +4,8 @@ if(isset($_GET["cerrarSesion"])){
     session_destroy();
 }
 require("logica/Evento.php");
+require("logica/TipoBoleta.php");
+require("logica/DetalleEvento.php");
 $paginasSinSesion = array(
     "presentacion/iniciarSesion.php",
     "presentacion/registro.php",

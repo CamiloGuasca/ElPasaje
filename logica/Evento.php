@@ -122,5 +122,14 @@ class Evento {
         }
         return $eventos;
     }
+    public function registro(){
+        $conexion = new Conexion();
+        $conexion -> abrirConexion();
+        $eventoDAO = new EventoDAO(null, $this -> nombreEve, $this -> fechIniEve, $this -> fechFinEve, $this -> precioEve, $this -> imagenEve, $this -> idLug, $this -> dProv);
+        $conexion -> ejecutarConsulta($eventoDAO -> registrar());
+        $this -> idEve = $conexion -> obtenerLlaveAutonumerica();
+        $conexion -> cerrarConexion();
+        return $this -> idEve;
+    }
 }
 ?>

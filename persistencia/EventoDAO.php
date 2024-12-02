@@ -43,5 +43,25 @@
                         dProv = ".$this -> dProv."
             ";      
         }
+        public function registrar(){
+            return "INSERT INTO
+                        eventos
+                        (nombreEve, 
+                        fechIniEve, 
+                        fechFinEve, 
+                        precioEve, 
+                        imagenEve, 
+                        idLug, 
+                        dProv)
+                    VALUES
+                        ('".$this -> nombreEve."',
+                         '".$this -> fechIniEve."',
+                         '".$this -> fechFinEve."',
+                         '".$this -> precioEve."',
+                         '".$this -> imagenEve."',
+                         '".$this -> idLug."',
+                         '".$this -> dProv."')
+            ";
+        }
     }
 ?>
