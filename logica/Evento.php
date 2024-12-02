@@ -131,5 +131,24 @@ class Evento {
         $conexion -> cerrarConexion();
         return $this -> idEve;
     }
+    public function actualizar(){
+        $conexion = new Conexion();
+        $conexion -> abrirConexion();
+        $eventoDAO = new EventoDAO($this -> idEve, $this -> nombreEve, $this -> fechIniEve, $this -> fechFinEve, $this -> precioEve, $this -> imagenEve, $this -> idLug, $this -> dProv);
+        if($this -> imagenEve != null){
+            $conexion -> ejecutarConsulta($eventoDAO -> actualizar());
+        }else{
+            $conexion -> ejecutarConsulta($eventoDAO -> actualizarSIM());
+        }
+        echo $eventoDAO -> actualizar();
+        $conexion -> cerrarConexion();
+    }
+    public function eliminar(){
+        $conexion = new Conexion();
+        $conexion -> abrirConexion();
+        $eventoDAO = new EventoDAO($this->idEve);
+        $conexion -> ejecutarConsulta($eventoDAO -> eliminar());
+        $conexion -> cerrarConexion();
+    }
 }
 ?>

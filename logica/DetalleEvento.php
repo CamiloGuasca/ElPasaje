@@ -67,6 +67,14 @@
             }
             return $detallesevento;
         }
+        public function eliminarIdEve(){
+            $conexion = new Conexion();
+            $conexion -> abrirConexion();
+            $detalleDAO = new DetalleEventoDAO();
+            $detalleDAO -> setIdEve($this -> idEve);
+            $conexion -> ejecutarConsulta($detalleDAO->eliminarIdEve());
+            $conexion -> cerrarConexion();
+        }
     }
 
 ?>

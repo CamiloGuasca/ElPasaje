@@ -66,5 +66,26 @@
             $conexion -> cerrarConexion();
             return $tipoboleta;
         }
+        public function registrar(){
+            $conexion = new Conexion();
+            $conexion -> abrirConexion();
+            $tipobolDAO = new TipoBoletaDAO(null, $this -> nombreTB, $this -> porcentajeTB,$this -> Proveedores_idProv);
+            $conexion -> ejecutarConsulta($tipobolDAO -> registrar());
+            $conexion -> cerrarConexion();
+        }
+        public function actualizar(){
+            $conexion = new Conexion();
+            $conexion -> abrirConexion();
+            $tipobolDAO = new TipoBoletaDAO($this -> idTB, $this -> nombreTB, $this -> porcentajeTB, null);
+            $conexion -> ejecutarConsulta($tipobolDAO -> actualizar());
+            $conexion -> cerrarConexion();
+        }
+        public function eliminar(){
+            $conexion = new Conexion();
+            $conexion -> abrirConexion();
+            $tipobolDAO = new TipoBoletaDAO($this -> idTB) ;
+            $conexion -> ejecutarConsulta($tipobolDAO -> eliminar());
+            $conexion -> cerrarConexion();
+        }
     }
 ?>

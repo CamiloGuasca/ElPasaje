@@ -63,5 +63,41 @@
                          '".$this -> dProv."')
             ";
         }
+        public function actualizar(){
+            return "UPDATE
+                        eventos
+                    SET
+                        nombreEVE = '".$this -> nombreEve."',
+                        fechIniEve = '".$this -> fechIniEve."',
+                        fechFinEve = '".$this -> fechFinEve."',
+                        precioEve = '".$this -> precioEve."',
+                        imagenEve = ".$this -> imagenEve.",
+                        idLug = ".$this -> idLug.",
+                        dProv = ".$this -> dProv."
+                    WHERE
+                        idEve = ".$this -> idEve."
+                    ";
+        }
+        public function actualizarSIM(){
+            return "UPDATE
+                        eventos
+                    SET
+                        nombreEVE = '".$this -> nombreEve."',
+                        fechIniEve = '".$this -> fechIniEve."',
+                        fechFinEve = '".$this -> fechFinEve."',
+                        precioEve = '".$this -> precioEve."',
+                        idLug = ".$this -> idLug.",
+                        dProv = ".$this -> dProv."
+                    WHERE
+                        idEve = ".$this -> idEve."
+                    ";
+        }
+        public function eliminar(){
+            return "DELETE FROM
+                        eventos
+                    WHERE
+                        idEve = ".$this->idEve."
+            ";
+        }
     }
 ?>

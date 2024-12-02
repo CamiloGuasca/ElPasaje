@@ -6,6 +6,7 @@ if(isset($_GET["cerrarSesion"])){
 require("logica/Evento.php");
 require("logica/TipoBoleta.php");
 require("logica/DetalleEvento.php");
+require("logica/Cliente.php");
 $paginasSinSesion = array(
     "presentacion/iniciarSesion.php",
     "presentacion/registro.php",
@@ -16,7 +17,8 @@ $paginasConSesion = array(
     "presentacion/sesionAdministrador.php",
     "presentacion/sesionCliente.php",
     "presentacion/sesionProveedor.php",
-    "presentacion/evento/gestionarEventos.php"
+    "presentacion/evento/gestionarEventos.php",
+    "presentacion/boleta/gestionarBoleta.php"
 );
 
 ?>

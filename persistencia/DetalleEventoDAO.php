@@ -67,5 +67,12 @@
                         idEve  = ".$this -> idEve."     
                     ";
         }
+        public function eliminarIdEve(){
+            return "DELETE FROM
+                        detalleevento
+                    WHERE
+                        idEve = ".$this -> idEve."
+                    ";
+        }
    } 
 ?>

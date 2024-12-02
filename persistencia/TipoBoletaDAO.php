@@ -63,5 +63,35 @@
                         idTB = ".$this -> getIdTB()."
                     ";
         }
+        public function registrar(){
+            return "INSERT INTO
+                        tipoboleta
+                        (nombreTB,
+                         porcentajeTB,
+                         Proveedores_idProv)
+                    VALUES
+                        ('".$this -> nombreTB."',
+                         '".$this -> porcentajeTB."',
+                         '".$this -> Proveedores_idProv."')
+                    ";
+        }
+        public function actualizar(){
+            return "UPDATE
+                        tipoboleta
+                    SET
+                        nombreTB = '".$this -> nombreTB."',
+                        porcentajeTB = '".$this -> porcentajeTB."'
+                    WHERE
+                        idTB = '".$this -> idTB."'
+                    ";
+        }
+        public function eliminar(){
+            return "DELETE FROM
+                        tipoboleta
+                    WHERE
+                        idtb = ".$this->idTB."
+
+            ";
+        }
     }
 ?>
