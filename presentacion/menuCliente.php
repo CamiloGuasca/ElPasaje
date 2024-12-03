@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
 	<div class="container">
-		<a class="navbar-brand" href="#"><img src="img/boleto.png" width="50" /></a>
+		<a class="navbar-brand" href='?pid=<?php echo base64_encode("presentacion/sesionCliente.php")?>'><img src="img/boleto.png" width="50" /></a>
 		<button class="navbar-toggler" type="button"
 			data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
 			aria-controls="navbarNavDropdown" aria-expanded="false"
@@ -11,15 +11,15 @@
 			<ul class="navbar-nav me-auto">
 				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
 					href="#" role="button" data-bs-toggle="dropdown"
-					aria-expanded="false">Producto</a>
+					aria-expanded="false">Factura</a>
 					<ul class="dropdown-menu">
-                        <li><a class='dropdown-item' href='#'>Consultar Producto</a></li>
+                        <li><a class='dropdown-item' href='?pid=<?php echo base64_encode("presentacion/cliente/facturasCliente.php")?>'>Gestionar Facturas</a></li>
 					</ul></li>
 			</ul>
 			
 			<ul class="navbar-nav">
 				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
-					href="#" role="button" data-bs-toggle="dropdown"
+					 role="button" data-bs-toggle="dropdown"
 					aria-expanded="false"><?php echo $cliente -> getNombrePersona()?></a>
 					<ul class="dropdown-menu">
                         <li><a class='dropdown-item' href='?cerrarSesion=true'>Cerrar Sesion</a></li>

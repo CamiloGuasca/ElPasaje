@@ -66,5 +66,17 @@
                              '".$this->idCli."')
                 ";
             }
+            public function consTod(){
+                return "SELECT
+                            idFacturaVenta,
+                            fechaFV,
+                            horaFV,
+                            idEve
+                        FROM
+                            facturaventa
+                        WHERE
+                            idCli = ".$this -> idCli."
+                ";
+            }
         }
 ?>

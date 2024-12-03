@@ -9,6 +9,7 @@ require("logica/DetalleEvento.php");
 require("logica/Cliente.php");
 require("logica/FacturaVenta.php");
 require("logica/DetalleFactura.php");
+require("logica/CarritoCompra.php");
 $paginasSinSesion = array(
     "presentacion/iniciarSesion.php",
     "presentacion/registro.php",
@@ -21,7 +22,8 @@ $paginasConSesion = array(
     "presentacion/sesionProveedor.php",
     "presentacion/evento/gestionarEventos.php",
     "presentacion/boleta/gestionarBoleta.php",
-    "presentacion/cliente/detalleEvento.php"
+    "presentacion/cliente/detalleEvento.php",
+    "presentacion/cliente/facturasCliente.php"
 );
 
 ?>

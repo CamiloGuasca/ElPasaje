@@ -30,7 +30,12 @@
 			$cantidad = $_POST["cantidadBol"];
 			$detfac = new DetalleFactura(null, $idfac, $idTP, $cantidad);
 			$detfac -> registrar();
-		}elseif($_POST["opcionBol"] == "montar"){}
+		}elseif($_POST["opcionBol"] == "montar"){
+			$idTP = $_POST["tipbol"];
+			$cantidad = $_POST["cantidadBol"];
+			$carrcomp = new CarritoCompra(null, $id, $idTP, $decoide,$cantidad);
+			$carrcomp -> registrar();
+		}
 	}
 ?>
   <style>

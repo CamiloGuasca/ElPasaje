@@ -65,5 +65,21 @@
             $conexion -> cerrarConexion();
             return $this -> idFacturaVenta;
         }
+        public function consTod(){
+            $factventas = array();
+            $conexion = new Conexion();
+            $conexion -> abrirConexion();
+            $facvenDAO  = new FacturaVentaDAO();
+            $facvenDAO -> setIdCli($this->idCli);
+            $conexion -> ejecutarConsulta($facvenDAO->consTod());
+        
+            while($registro = $conexion -> siguienteRegistro()){
+                $evento = new Evento($registro[3]);
+                $evento = $evento -> consId();
+                $factventa = new FacturaVenta($registro[0],$registro[1], $registro[2],$evento, $this->idCli);
+                array_push( $factventas, $factventa);
+            }
+            return $factventas;
+        }
     }
 ?>

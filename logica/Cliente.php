@@ -14,7 +14,6 @@ class Cliente extends Persona{
         $conexion -> ejecutarConsulta($clienteDAO -> consTod()); 
         while($registro = $conexion -> siguienteRegistro()){
             $cliente = new Cliente($registro[0], $registro[1], $registro[2], $registro[3], $registro[4], $registro[5]);
-            echo $cliente -> getNombrePersona();
             array_push($clientes, $cliente);
         }
         return $clientes;
