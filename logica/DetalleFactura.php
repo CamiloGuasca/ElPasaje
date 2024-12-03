@@ -53,6 +53,18 @@
             $this -> idDF = $conexion -> obtenerLlaveAutonumerica();
             $conexion -> cerrarConexion();
         }
-
+        public function consIdFac(){
+            $conexion = new Conexion();
+            $conexion -> abrirConexion();
+            $detfacDAO = new DetalleFacturaDAO();
+            $detfacDAO -> setIdFacturaVenta($this -> idFacturaVenta);
+            $conexion -> ejecutarConsulta($detfacDAO -> consIdFac());
+            $registro = $conexion -> siguienteRegistro();
+            $tipbol = new TipoBoleta($registro[1]);
+            $tipobol = $tipbol -> conTipBol();
+            $detfac = new DetalleFactura($registro[0],$this->idFacturaVenta, $tipobol, $registro[2]);
+            $conexion  -> cerrarConexion();
+            return $detfac;
+        }
     }
 ?>

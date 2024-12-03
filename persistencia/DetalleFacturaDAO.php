@@ -55,5 +55,14 @@
                          ".$this -> cantidad.")
                     ";
         }
+        public function consIdFac(){
+            return "SELECT
+                        idDF,
+                        idTB,
+                        cantidadDFV
+                    FROM
+                        detallefacturaventa
+                    ";
+        }
     }
 ?>
