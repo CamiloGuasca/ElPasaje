@@ -1,4 +1,6 @@
 <?php
+    require_once("./persistencia/Conexion.php");
+    require("./persistencia/FacturaVentaDAO.php");
     class FacturaVenta{
         private $idFacturaVenta;
         private $fechaFV;
@@ -61,6 +63,7 @@
             $conexion -> ejecutarConsulta($facvenDAO->registrar());
             $this -> idFacturaVenta = $conexion -> obtenerLlaveAutonumerica();
             $conexion -> cerrarConexion();
+            return $this -> idFacturaVenta;
         }
     }
 ?>

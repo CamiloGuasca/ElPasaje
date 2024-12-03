@@ -7,6 +7,8 @@ require("logica/Evento.php");
 require("logica/TipoBoleta.php");
 require("logica/DetalleEvento.php");
 require("logica/Cliente.php");
+require("logica/FacturaVenta.php");
+require("logica/DetalleFactura.php");
 $paginasSinSesion = array(
     "presentacion/iniciarSesion.php",
     "presentacion/registro.php",

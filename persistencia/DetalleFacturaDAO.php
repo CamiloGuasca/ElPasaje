@@ -1,7 +1,5 @@
 <?php
-    require_once("./persistencia/Conexion.php");
-    require("./persistencia/DetalleFacturaDAO.php");
-    class DetalleFactura{
+    class DetalleFacturaDAO{
         private $idDF;
         private $idFacturaVenta;
         private $idTB;
@@ -45,14 +43,17 @@
         public function setCantidad($cantidad) {
             $this->cantidad = $cantidad;
         }
-        public function registrar(){
-            $conexion = new Conexion();
-            $conexion -> abrirConexion();
-            $detfacDAO = new DetalleFacturaDAO(null, $this->idFacturaVenta, $this->idTB, $this->cantidad);
-            $conexion -> ejecutarConsulta($detfacDAO -> registrar());
-            $this -> idDF = $conexion -> obtenerLlaveAutonumerica();
-            $conexion -> cerrarConexion();
+        public function registrar() {
+            return "INSERT INTO 
+                        detallefacturaventa
+                        (idFacturaVenta,
+                         idTB,
+                         cantidadDFV)
+                    VALUES
+                        (".$this -> idFacturaVenta.",
+                         ".$this -> idTB.",
+                         ".$this -> cantidad.")
+                    ";
         }
-
     }
 ?>

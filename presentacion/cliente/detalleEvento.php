@@ -17,14 +17,19 @@
 	$evento = $evento -> consId();
 
 	$imagenBase64 = base64_encode($evento->getImagenEve());
-	
+	$ideve = base64_encode($decoide);
 	$detallevento = new DetalleEvento();
 	$detallevento -> setIdEve($decoide);
 	$detalleseve = $detallevento -> consIdEve();
 
 	if(isset($_POST["opcionBol"])){
 		if($_POST["opcionBol"] == "comprar"){
-			
+			$facve = new FacturaVenta(null, null,null,$decoide, $id);
+			$idfac = $facve -> registrar();
+			$idTP = $_POST["tipbol"];
+			$cantidad = $_POST["cantidadBol"];
+			$detfac = new DetalleFactura(null, $idfac, $idTP, $cantidad);
+			$detfac -> registrar();
 		}elseif($_POST["opcionBol"] == "montar"){}
 	}
 ?>
@@ -103,7 +108,7 @@
           <h5 class="modal-title" id="exampleModalLabel">Confirma tu Compra</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form method="post" action="?pid=<?php echo base64_encode('presentacion/cliente/detalleEvento.php') ?>">
+        <form method="post" action='?pid=<?php echo base64_encode('presentacion/cliente/detalleEvento.php') ?>&ideve="<?php echo $ideve?>"'>
             <input type="hidden" name="opcionBol" id="opcionBol" value="">
 			<input type="hidden" name="tipbol" id="tipbol">
             <div class="modal-body">

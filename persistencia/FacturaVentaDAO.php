@@ -60,8 +60,7 @@
                             idEve,
                             idCli)
                         VALUES
-                            ('".$this->fechaFV."',
-                             CURDATE(),
+                            (CURDATE(),
                              CURTIME(),
                              '".$this->idEve."',
                              '".$this->idCli."')
