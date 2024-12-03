@@ -193,7 +193,7 @@
         $('#eliminar').on('show.bs.modal', function(event){    
             var button = $(event.relatedTarget);
             var ideve = button.data('ideve');
-
+            console.log("Byuaa", ideve);
             $(this).find('#ideve').val(ideve);
         });
     });

@@ -17,7 +17,9 @@
             echo "<div class='card'>";
             echo "<div class='card-body'>";
             $imagenBase64 = base64_encode($eventoActual->getImagenEve());
-            echo "<a href='#'><div class='text-center'><img src='data:image/jpeg;base64,$imagenBase64' width='70%' /></div></a><br>";
+            $direccion = base64_encode('presentacion/cliente/detalleEvento.php');
+            $ideve = base64_encode($eventoActual -> getIdEve());
+            echo "<a href='?pid=".$direccion."&ideve=".$ideve."'><div class='text-center'><img src='data:image/jpeg;base64,$imagenBase64' width='70%' /></div></a><br>";
             echo "" . $eventoActual->getNombreEve() . "<br>";
             echo "Fecha: " . $eventoActual->getFechFinEve() . "<br>";
             echo "Valor: $" . $eventoActual->getPrecioEve() . "<br>";

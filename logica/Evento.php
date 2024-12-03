@@ -150,5 +150,19 @@ class Evento {
         $conexion -> ejecutarConsulta($eventoDAO -> eliminar());
         $conexion -> cerrarConexion();
     }
+    public function consId(){
+        $conexion = new Conexion();
+        $conexion -> abrirConexion();
+        $eventoDAO = new EventoDAO($this -> idEve,null,null,null,null,null,null,null);
+        $conexion -> ejecutarConsulta($eventoDAO -> consId());
+        $registro = $conexion -> siguienteRegistro();
+        $lugar = new Lugar($registro[5]);
+        $lugar = $lugar = $lugar->consId();
+        $proveedor = new Proveedor($registro[6]);
+        $proveedor = $proveedor = $proveedor->consId();
+        $evento = new Evento($this -> idEve, $registro[0], $registro[1], $registro[2], $registro[3], $registro[4], $lugar, $proveedor);
+        $conexion -> cerrarConexion();
+        return $evento;
+    }
 }
 ?>

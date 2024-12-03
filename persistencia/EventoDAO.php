@@ -99,5 +99,20 @@
                         idEve = ".$this->idEve."
             ";
         }
+        public function consId(){
+            return"SELECT
+                        nombreEve,
+                        fechIniEve,
+                        fechFinEve,
+                        precioEve,
+                        imagenEve,
+                        idLug,
+                        dProv
+                    FROM
+                        eventos
+                    WHERE
+                        idEve = ".$this -> idEve."
+            ";
+        }
     }
 ?>
