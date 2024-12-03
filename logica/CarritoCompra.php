@@ -1,6 +1,8 @@
 <?php
     require_once("./persistencia/Conexion.php");
     require("./persistencia/CarritoCompraDAO.php");
+    require_once("TipoBoleta.php");
+    require_once("Evento.php");
     class CarritoCompra{
         private $idCC;
         private $idCli;
@@ -61,6 +63,31 @@
             $carricomDAO = new CarritoCompraDAO(null, $this->idCli,$this->idTB,$this->idEve,$this->Cantidad);
             $conexion -> ejecutarConsulta($carricomDAO -> registro());
             $this->idCC = $conexion -> obtenerLlaveAutonumerica();
+            $conexion -> cerrarConexion();
+        }
+        public function consIdCli() {
+            $carritos = array();
+            $conexion = new Conexion();
+            $conexion -> abrirConexion();
+            $carricomDAO = new CarritoCompraDAO();
+            $carricomDAO -> setIdCli($this->idCli);
+            $conexion -> ejecutarConsulta($carricomDAO -> consIdCli());
+            while($registro = $conexion -> siguienteRegistro()){
+               
+                $tipoBoleta = new TipoBoleta($registro[1]);
+                $tipoBoleta = $tipoBoleta -> conTipBol();
+                $evento = new Evento($registro[2]);
+                $evento = $evento = $evento -> consId();
+                $carritocom = new CarritoCompra($registro[0],$this->idCli,$tipoBoleta,$evento,$registro[3]);
+                array_push($carritos, $carritocom);
+            }
+            return $carritos;
+        }
+        public function eliminarPID(){
+            $conexion = new Conexion();
+            $conexion -> abrirConexion();
+            $carricomDAO = new CarritoCompraDAO($this->idCC);
+            $conexion -> ejecutarConsulta($carricomDAO -> eliminarPID());
             $conexion -> cerrarConexion();
         }
     }

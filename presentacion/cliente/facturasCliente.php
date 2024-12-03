@@ -14,13 +14,12 @@
     $facve -> setIdCli($id);
     $facvens = $facve -> consTod();
 ?>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 <div id="contenido-general">
     <div class="container my-4">
         <!-- Botón adicional -->
         <div class="d-flex justify-content-between mb-3">
-            <h3>Eventos</h3>
-            <button class="btn btn-primary" id="customButton">Agregar Elemento</button>
+            <h3>Facturas</h3>
         </div>
 
         <!-- Tabla -->

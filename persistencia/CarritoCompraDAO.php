@@ -67,5 +67,24 @@
                          ".$this->Cantidad.")
                     ";
         }
+        public function consIdCli(){
+            return "SELECT 
+                        idCC,
+                        idTB,
+                        idEve,
+                        Cantidad
+                    FROM
+                        carritocompra
+                    WHERE
+                        idCli = ".$this->idCli."
+                    ";
+        }
+        public function eliminarPID(){
+            return "DELETE FROM
+                        carritocompra
+                    WHERE
+                        idCC = ".$this->idCC."
+                    ";
+        }
     }
 ?>
