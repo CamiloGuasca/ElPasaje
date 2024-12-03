@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg custom-btn bg-body-tertiary">
 	<div class="container">
 		<a class="navbar-brand" href="#"><img src="img/boleto.png" width="50" /></a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -11,20 +11,14 @@
 			<ul class="navbar-nav">
 				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
 					href="#" role="button" data-bs-toggle="dropdown"
-					aria-expanded="false">Marca</a>
-					<ul class="dropdown-menu">
-                            <?php
-                            ?>
-						</ul></li>
+					aria-expanded="false"></a>
+		
 			</ul>
 			<ul class="navbar-nav me-auto">
 				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
 					href="#" role="button" data-bs-toggle="dropdown"
-					aria-expanded="false">Categoria</a>
-					<ul class="dropdown-menu">
-                            <?php
-                            ?>
-						</ul></li>
+					aria-expanded="false"></a>
+			
 			</ul>
 			<ul class="navbar-nav">
 				<li class="nav-item"><a href="?pid=<?php echo base64_encode("presentacion/registro.php") ?>" class="nav-link"

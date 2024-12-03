@@ -34,6 +34,18 @@ $paginasConSesion = array(
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 </head>
 <body>
+<style>
+    .custom-btn {
+      background-color: #f5725d; /* Color de fondo (naranja) */
+      color: white; /* Color del texto */
+      border: none; /* Elimina el borde */
+    }
+    .otro{
+      background-color: #ffd15c; /* Color de fondo (naranja) */
+      color: white; /* Color del texto */
+      border: none;
+    }
+</style>
 <?php 
 if(!isset($_GET["pid"])){
     include ("presentacion/encabezado.php");

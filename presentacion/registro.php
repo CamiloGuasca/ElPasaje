@@ -1,5 +1,5 @@
 <?php
-require("./logica/Cliente.php");
+require_once("./logica/Cliente.php");
 $error = false;
 if (isset($_POST["registrar"])) {      
     if($_POST["tipo"] == "cliente"){
@@ -11,12 +11,19 @@ if (isset($_POST["registrar"])) {
     }
 }
 include ("presentacion/encabezado.php")?>
+<style>
+    .custom-btn {
+      background-color: #f5725d; /* Color de fondo (naranja) */
+      color: white; /* Color del texto */
+      border: none; /* Elimina el borde */
+    }
+</style>
 <div class="container mb-5">
 	<div class="row mt-5">
 		<div class="col-4"></div>
 		<div class="col-4">
-			<div class="card border-primary">
-				<div class="card-header text-bg-info">
+			<div class="card">
+				<div class="card-header custom-btn ">
 					<h4>Registro</h4>
 				</div>
 				<div class="card-body">
@@ -50,7 +57,7 @@ include ("presentacion/encabezado.php")?>
                                 <option value="provedor">Proveedor</option>
                             <select>
                         </div>
-						<button type="submit" name="registrar" class="btn btn-primary">Registrarse</button>
+						<button type="submit" name="registrar" class="btn custom-btn">Registrarse</button>
 						<?php if($error){ ?>
                         <div class="alert alert-danger mt-3"
 							role="alert">Error de correo o clave</div>    

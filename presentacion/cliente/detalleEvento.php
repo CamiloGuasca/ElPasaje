@@ -38,12 +38,7 @@
 		}
 	}
 ?>
-  <style>
-    .custom-btn {
-      background-color: #f5725d; /* Color de fondo (naranja) */
-      color: white; /* Color del texto */
-      border: none; /* Elimina el borde */
-    }
+
 	</style>
  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <div class="container my-5 " style="max-width: 60%;">

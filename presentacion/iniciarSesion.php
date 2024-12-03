@@ -24,12 +24,19 @@ if (isset($_POST["autenticar"])) {
 	}
 }
 include ("presentacion/encabezado.php")?>
+<style>
+    .custom-btn {
+      background-color: #f5725d; /* Color de fondo (naranja) */
+      color: white; /* Color del texto */
+      border: none; /* Elimina el borde */
+    }
+</style>
 <div class="container">
 	<div class="row mt-5">
 		<div class="col-4"></div>
 		<div class="col-4">
-			<div class="card border-primary">
-				<div class="card-header text-bg-info">
+			<div class="card">
+				<div class="card-header custom-btn">
 					<h4>Iniciar Sesion</h4>
 				</div>
 				<div class="card-body">
@@ -49,13 +56,15 @@ include ("presentacion/encabezado.php")?>
                                 <option value="proveedor">Proveedor</option>
                             <select>
                         </div>
-						<button type="submit" name="autenticar" class="btn btn-primary">Iniciar
+						<button type="submit" name="autenticar" class="btn custom-btn">Iniciar
 							Sesion</button>
-						<h5>
+						<br>
+						<br>
+						<h6>
 							<a
-								href="?pid=<?php echo base64_encode("presentacion/cliente/registro.php")?>">Registrarse
+								href="?pid=<?php echo base64_encode("presentacion/registro.php")?>">Registrarse
 							</a>
-						</h5>
+						</h6>
 						<?php if($error){ ?>
                         <div class="alert alert-danger mt-3"
 								role="alert">Error de correo o clave</div>    

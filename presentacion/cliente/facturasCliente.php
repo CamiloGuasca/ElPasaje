@@ -138,7 +138,7 @@
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary" onclick="imprimirModal()">Imprimir Modal</button>
+            <button type="button" class="btn btn-primary" onclick="imprimirModal()">Imprimir Factura</button>
         </div>
       </div>
     </div>

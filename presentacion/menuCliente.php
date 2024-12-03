@@ -7,7 +7,7 @@
     $cliente = new Cliente($id);
 	$cliente -> consId();
 ?>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg custom-btn bg-body-tertiary">
 	<div class="container">
 		<a class="navbar-brand" href='?pid=<?php echo base64_encode("presentacion/sesionCliente.php")?>'><img src="img/boleto.png" width="50" /></a>
 		<button class="navbar-toggler" type="button"
@@ -21,7 +21,7 @@
 					href="#" role="button" data-bs-toggle="dropdown"
 					aria-expanded="false">Carrito</a>
 					<ul class="dropdown-menu">
-                        <li><button type='button' class='dropdown-item' data-bs-toggle='modal' data-bs-target='#modalImpresion'>Ver Carrito</button></li>
+                        <li><button type='button' class='dropdown-item' data-bs-toggle='modal' data-bs-target='#carrito'>Ver Carrito</button></li>
 					</ul></li>
 			</ul>
 		<div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -51,7 +51,7 @@
 	$carritos = $carrito -> consIdCli();
 ?>
  <!-- Modal de Bootstrap -->
- <div class="modal fade" id="modalImpresion" tabindex="-1" aria-labelledby="modalImpresionLabel" aria-hidden="true">
+ <div class="modal fade" id="carrito" tabindex="-1" aria-labelledby="modalImpresionLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg"> <!-- Cambia el tamaño del modal aquí -->
       <div class="modal-content">
         <div class="modal-header">
