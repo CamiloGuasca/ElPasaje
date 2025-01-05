@@ -1,6 +1,6 @@
 <?php
 require_once("./persistencia/Conexion.php");
-require("./persistencia/EventoDAO.php");
+require_once("./persistencia/EventoDAO.php");
 require("Lugar.php");
 require("Proveedor.php");
 class Evento {
@@ -163,6 +163,24 @@ class Evento {
         $evento = new Evento($this -> idEve, $registro[0], $registro[1], $registro[2], $registro[3], $registro[4], $lugar, $proveedor);
         $conexion -> cerrarConexion();
         return $evento;
+    }
+    public function conPN($filtro){
+        $eventos = array();
+        $conexion = new Conexion();
+        $conexion -> abrirConexion();
+        $eventoDAO = new EventoDAO();
+        $eventoDAO -> setDProv($this->dProv);
+        $conexion -> ejecutarConsulta($eventoDAO -> conPN($filtro));
+        while ($registro = $conexion -> siguienteRegistro()) {
+            $lugar = new Lugar($registro[6]);
+            $lugar = $lugar->consId();
+            $proveedor = new Proveedor($registro[7]);
+            $proveedor = $proveedor->consId();
+            $evento = new Evento($registro[0], $registro[1], $registro[2], $registro[3], $registro[4], $registro[5], $lugar, $proveedor);
+            array_push($eventos, $evento);
+        }
+
+        return $eventos;
     }
 }
 ?>

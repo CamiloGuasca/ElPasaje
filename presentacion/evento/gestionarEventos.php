@@ -77,14 +77,18 @@
 
 
 <div class="container my-4">
-        <!-- Botón adicional -->
-        <div class="d-flex justify-content-between mb-3">
-            <h3>Eventos</h3>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registro">Agregar Evento</button>
-        </div>
-
+    <div class="d-flex justify-content-between mb-3">
+        <h3>Eventos</h3>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registro">Agregar Evento</button>
+    </div>
+    <div>
+        <input type="text" id="filtro" class="form-control" placeholder="Buscar">
+    </div>
+</div>
+<div class="container my-4">
+    <div id="resultado">
         <!-- Tabla -->
-        <table id="example" class="table table-striped table-bordered" style="width:100%">
+        <table class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -145,6 +149,7 @@
                 ?>
             </tbody>
         </table>
+        </div>
         <div class="modal fade" id="actualizar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="registroLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl"> <!-- Modal más ancho -->
             <div class="modal-content">
@@ -355,13 +360,17 @@
             </div>
         </div>
     </div>
-    <!-- JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.datatables.net/rowreorder/1.4.1/js/dataTables.rowReorder.min.js"></script>
-    <script>
+    <!-- JavaScript -->     
+
+<script>
+
+        $(document).ready(function(){
+            $("#filtro").keyup(function(){
+                url = "indexAjax.php?pid=<?php echo base64_encode("presentacion/evento/consultarEvento.php") ?>&filtro=" + $("#filtro").val() + "&id=<?php echo $id; ?>";
+                console.log("URL: ",url);
+                $("#resultado").load(url);
+            });
+        });
         $(document).ready(function() {
             // Cuando se abre el modal
             $('#actualizar').on('show.bs.modal', function(event) {
@@ -492,18 +501,5 @@
                 preview.style.display = 'none'; // Ocultar la imagen si no hay archivo
             }
         });
-
-    </script>
-        <script>
-        $(document).ready(function () {
-            // Inicializar DataTable con reordenamiento
-            var table = $('#example').DataTable({
-                rowReorder: true,
-                responsive: true,
-                language: {
-                    url: "https://cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json"
-                }
-            });
-        });
-    </script>
+</script>
 

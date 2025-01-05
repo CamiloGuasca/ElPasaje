@@ -1,4 +1,4 @@
-<?php
+<div?php
    $id = $_SESSION["id"];
    $rol = $_SESSION["rol"];
    if($rol != "proveedor"){
@@ -42,21 +42,24 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.4.1/css/rowReorder.bootstrap5.min.css">
 
-
 <div class="container my-4 w-50">
-        <!-- Botón adicional -->
         <div class="d-flex justify-content-between mb-3">
             <h3>Boletas</h3>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registro">Agregar Boleta</button>
         </div>
-
-        <!-- Tabla -->
+        <div>
+            <input type="text" id="filtro" class="form-control" placeholder="Buscar">
+        </div>
+</div>
+<div class="container my-4 w-50">
+  <div id="resultado">  
         <table id="example" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
                     <th>Id</th>
                     <th>Nombre</th>
                     <th>Porcentaje</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -84,6 +87,7 @@
             ?>
             </tbody>
         </table>
+  </div>
 </div>
 
 
@@ -168,13 +172,6 @@
       </div>
     </div>
   </div>
-
-      <!-- JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.datatables.net/rowreorder/1.4.1/js/dataTables.rowReorder.min.js"></script>
   <script>
     $(document).ready(function(){
         $('#actualizar').on('show.bs.modal', function(event){    

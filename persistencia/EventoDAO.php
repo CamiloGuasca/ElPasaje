@@ -20,7 +20,10 @@
             $this->idLug = $idLug;
             $this->dProv = $dProv;
         }
-    
+        
+        public function setDProv($dProv){
+            $this -> dProv = $dProv;
+        }
         public function consTod(){
             return "SELECT
                         idEve, nombreEve, fechIniEve, fechFinEve, precioEve, imagenEve, idLug, dProv
@@ -114,5 +117,24 @@
                         idEve = ".$this -> idEve."
             ";
         }
+        public function conPN($filtro){
+            return "SELECT 
+                        idEve,
+                        nombreEve,
+                        fechIniEve,
+                        fechFinEve,
+                        precioEve,
+                        imagenEve,
+                        idLug,
+                        dProv
+                    FROM 
+                        eventos 
+                    WHERE nombreEve 
+                        LIKE '%".$filtro."%'
+                        AND
+                        dProv = ".$this -> dProv."
+                    ";
+        }
+
     }
 ?>
