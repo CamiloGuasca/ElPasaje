@@ -93,5 +93,20 @@
 
             ";
         }
+        public function conPN($filtro){
+            return "SELECT 
+                        idTB,
+                        nombreTB,
+                        porcentajeTB,
+                        Proveedores_idProv
+                    FROM 
+                        tipoboleta 
+                    WHERE nombreTB
+                        LIKE '%".$filtro."%'
+                        AND
+                        Proveedores_idProv =".$this -> Proveedores_idProv."
+                        ";
+                        
+        }
     }
 ?>

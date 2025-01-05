@@ -1,4 +1,4 @@
-<div?php
+<?php
    $id = $_SESSION["id"];
    $rol = $_SESSION["rol"];
    if($rol != "proveedor"){
@@ -173,6 +173,13 @@
     </div>
   </div>
   <script>
+    $(document).ready(function(){
+      $("#filtro").keyup(function(){
+        let filtro = encodeURIComponent($("#filtro").val());
+        url = "indexAjax.php?pid=<?php echo base64_encode("presentacion/boleta/consultarBoletaAjax.php") ?>&filtro=" + filtro + "&id=<?php echo $id; ?>";
+        $("#resultado").load(url);
+      });
+    });
     $(document).ready(function(){
         $('#actualizar').on('show.bs.modal', function(event){    
             var button = $(event.relatedTarget);

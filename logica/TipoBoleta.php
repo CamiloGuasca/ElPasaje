@@ -87,5 +87,18 @@
             $conexion -> ejecutarConsulta($tipobolDAO -> eliminar());
             $conexion -> cerrarConexion();
         }
+        public function conPN($filtro){
+            $tipoboletas = array();
+            $conexion = new Conexion();
+            $conexion -> abrirConexion();
+            $tipoboletadao = new TipoBoletaDAO();
+            $tipoboletadao -> setProveedoresIdProv($this->Proveedores_idProv);
+            $conexion -> ejecutarConsulta($tipoboletadao->conPN($filtro));
+            while($registro = $conexion -> siguienteRegistro()){
+                $tipoboleta = new TipoBoleta($registro[0], $registro[1], $registro[2], $this->Proveedores_idProv);
+                array_push($tipoboletas, $tipoboleta);
+            }
+            return $tipoboletas;
+        }
     }
 ?>

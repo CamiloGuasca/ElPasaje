@@ -1,5 +1,4 @@
 <?php
-    if(isset($_GET["filtro"]))
     $filtro = $_GET["filtro"];
     $id = $_GET["id"];
     $evento = new Evento();
