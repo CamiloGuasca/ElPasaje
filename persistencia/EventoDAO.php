@@ -47,7 +47,7 @@
             ";      
         }
         public function registrar(){
-            return "INSERT INTO
+          /*  return "INSERT INTO
                         eventos
                         (nombreEve, 
                         fechIniEve, 
@@ -61,12 +61,42 @@
                          '".$this -> fechIniEve."',
                          '".$this -> fechFinEve."',
                          '".$this -> precioEve."',
-                         '".$this -> imagenEve."',
+                         ".$this -> imagenEve.",
                          '".$this -> idLug."',
                          '".$this -> dProv."')
-            ";
+            ";*/
+            return "INSERT INTO 
+                        eventos 
+                            (nombreEve, 
+                            fechIniEve, 
+                            fechFinEve, 
+                            precioEve, 
+                            imagenEve, 
+                            idLug, 
+                            dProv)
+                    VALUES (:nombreEve, 
+                            :fechIniEve, 
+                            :fechFinEve, 
+                            :precioEve, 
+                            :imagenEve, 
+                            :idLug, 
+                            :dProv)
+                    ";
         }
         public function actualizar(){
+            return "UPDATE 
+                        eventos
+                    SET
+                        nombreEve = :nombreEve,
+                        fechIniEve = :fechIniEve,
+                        fechFinEve = :fechFinEve,
+                        precioEve = :precioEve,
+                        imagenEve = :imagenEve,
+                        idLug = :idLug,
+                        dProv = :dProv
+                    WHERE idEvento = :idEvento
+                    ";
+            /*
             return "UPDATE
                         eventos
                     SET
@@ -80,6 +110,7 @@
                     WHERE
                         idEve = ".$this -> idEve."
                     ";
+            */
         }
         public function actualizarSIM(){
             return "UPDATE

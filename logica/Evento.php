@@ -1,5 +1,9 @@
 <?php
 require_once("./persistencia/Conexion.php");
+require_once("./persistencia/Conn.php");
+if (!class_exists('Conn')) {
+    die("La clase Conn no está cargada correctamente.");
+}
 require_once("./persistencia/EventoDAO.php");
 require("Lugar.php");
 require("Proveedor.php");
@@ -123,13 +127,41 @@ class Evento {
         return $eventos;
     }
     public function registro(){
+        /*
         $conexion = new Conexion();
         $conexion -> abrirConexion();
         $eventoDAO = new EventoDAO(null, $this -> nombreEve, $this -> fechIniEve, $this -> fechFinEve, $this -> precioEve, $this -> imagenEve, $this -> idLug, $this -> dProv);
         $conexion -> ejecutarConsulta($eventoDAO -> registrar());
         $this -> idEve = $conexion -> obtenerLlaveAutonumerica();
         $conexion -> cerrarConexion();
-        return $this -> idEve;
+        return $this -> idEve;*/
+        try {
+            $conexion = Conn::getInstance()->getConnection();
+            $eventoDAO = new EventoDAO(
+                idEve: null,
+                nombreEve: $this->nombreEve,
+                fechIniEve: $this->fechIniEve,
+                fechFinEve: $this->fechFinEve,
+                precioEve: $this->precioEve,
+                imagenEve: $this->imagenEve,
+                idLug: $this->idLug,
+                dProv: $this->dProv
+            );
+        
+            $stmt = $conexion->prepare($eventoDAO->registrar());
+            $stmt->bindParam(':nombreEve', $this->nombreEve);
+            $stmt->bindParam(':fechIniEve', $this->fechIniEve);
+            $stmt->bindParam(':fechFinEve', $this->fechFinEve);
+            $stmt->bindParam(':precioEve', $this->precioEve);
+            $stmt->bindParam(':imagenEve', $this->imagenEve);
+            $stmt->bindParam(':idLug', $this->idLug);
+            $stmt->bindParam(':dProv', $this->dProv);
+        
+            $stmt->execute();
+            return $conexion->lastInsertId();
+        } catch (Exception $e) {
+            die("Error en el registro: " . $e->getMessage());
+        }
     }
     public function actualizar(){
         $conexion = new Conexion();

@@ -24,24 +24,35 @@
             $fechaFin = $_POST["fechaFinReg"];
             $precioBas = $_POST["preciobReg"];
             $lugarReg = $_POST["idlugarReg"];
-            $imagenReg = null;
-            if (isset($_FILES['imagenAct']) && $_FILES['imagenAct']['error'] === 0) {
-                // Procesar la imagen
-                $imagenReg = $imagen = file_get_contents($_FILES['imagenAct']['tmp_name']);
-            } else {
-                echo "No se ha subido ningún archivo o ha ocurrido un error al cargar.";
-            }
-            $even = new Evento(null, $nombreBoleta,  $fechaInicio, $fechaFin, $precioBas, $imagenReg, $lugarReg, $id);
-            $ideve = $even -> registro();
-
-            if (isset($_POST['inputs'])) {
-                foreach ($_POST['inputs'] as $id => $values) {
-                    $text = $values['text'];  // Texto del select
-                    $value = $values['value']; // Valor ingresado
-                    $detallevento = new DetalleEvento(null, $ideve, $id, $value);
-                    $detallevento -> registro();
+        
+            // Verifica si el archivo se ha subido correctamente
+            //if (isset($_FILES['imagenReg']) && $_FILES['imagenReg']['error'] === UPLOAD_ERR_OK) {
+                $rutaLocal = $_FILES["imagenReg"]["tmp_name"];
+                $tipoArchivo = mime_content_type($rutaLocal);
+                $imagenReg = file_get_contents($rutaLocal);
+        
+                // Validar tipo de archivo
+                if (!in_array($tipoArchivo, ['image/jpeg', 'image/png', 'image/gif'])) {
+                    die("Tipo de archivo no válido.");
                 }
-            }
+        
+                // Mover imagen al servidor (opcional)
+                // Registrar evento
+                $even = new Evento(null, $nombreBoleta, $fechaInicio, $fechaFin, $precioBas, $imagenReg, $lugarReg, $id);
+                $ideve = $even->registro();
+        
+                // Registrar detalles del evento
+                if (isset($_POST['inputs'])) {
+                    foreach ($_POST['inputs'] as $id => $values) {
+                        $text = $values['text'];
+                        $value = $values['value'];
+                        $detallevento = new DetalleEvento(null, $ideve, $id, $value);
+                        $detallevento->registro();
+                    }
+                }
+           // } else {
+             //   die("Error al subir la imagen.");
+           // }
         }elseif($_POST["opcion"] == "actualizar"){
             $idevento = $_POST["ideventoAct"];
             $nombreBoleta = $_POST["nombreAct"];
@@ -63,7 +74,7 @@
             $even = new Evento($idevento);
             $detalleven = new DetalleEvento();
             $detalleven -> setIdEve($idevento);
-            $detalleven -> eliminar();
+            $detalleven -> eliminarIdEve();
             $even -> eliminar();
         }
     }
@@ -269,7 +280,7 @@
                     <h5 class="modal-title" id="registroLabel">Nuevo Evento </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="post" action="?pid=<?php echo base64_encode('presentacion/evento/gestionarEventos.php') ?>">
+                <form method="post" enctype="multipart/form-data" action="?pid=<?php echo base64_encode('presentacion/evento/gestionarEventos.php') ?>">
                 <div class="modal-body">
                     <div class="row">
                         <!-- Primera sección -->
@@ -308,8 +319,8 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="imagenAct" class="form-label">Imagen del Evento</label>
-                                    <input type="file" name = "imagenAct" class="form-control" id="imagenAct">
+                                    <label for="imagenReg" class="form-label">Imagen del Evento</label>
+                                    <input type="file" name="imagenReg" class="form-control" id="imagenReg">
                                 </div>
                         </div>
 
@@ -501,5 +512,6 @@
                 preview.style.display = 'none'; // Ocultar la imagen si no hay archivo
             }
         });
+        
 </script>
 

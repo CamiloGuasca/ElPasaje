@@ -53,6 +53,7 @@
             $conexion = new conexion();
             $conexion -> abrirConexion();
             $detalleeventodao = new DetalleEventoDAO($this -> idDE);
+            echo $detalleeventodao ->registroDE();
             $conexion -> ejecutarConsulta($detalleeventodao ->registroDE());
         }
         public function consIdEve(){
@@ -72,6 +73,7 @@
             $conexion -> abrirConexion();
             $detalleDAO = new DetalleEventoDAO();
             $detalleDAO -> setIdEve($this -> idEve);
+    
             $conexion -> ejecutarConsulta($detalleDAO->eliminarIdEve());
             $conexion -> cerrarConexion();
         }
