@@ -168,11 +168,24 @@ class Evento {
         $conexion -> abrirConexion();
         $eventoDAO = new EventoDAO($this -> idEve, $this -> nombreEve, $this -> fechIniEve, $this -> fechFinEve, $this -> precioEve, $this -> imagenEve, $this -> idLug, $this -> dProv);
         if($this -> imagenEve != null){
-            $conexion -> ejecutarConsulta($eventoDAO -> actualizar());
+            try{
+                $con = Conn::getInstance()->getConnection();
+                $stmt = $con->prepare($eventoDAO->actualizar());
+                $stmt->bindParam(':nombreEve', $this->nombreEve,  PDO::PARAM_STR);
+                $stmt->bindParam(':fechIniEve', $this->fechIniEve,  PDO::PARAM_STR);
+                $stmt->bindParam(':fechFinEve', $this->fechFinEve,  PDO::PARAM_STR);
+                $stmt->bindParam(':precioEve', $this->precioEve,  PDO::PARAM_STR);
+                $stmt->bindParam(':imagenEve', $this->imagenEve,  PDO::PARAM_STR);
+                $stmt->bindParam(':idLug', $this->idLug,  PDO::PARAM_STR);
+                $stmt->bindParam(':dProv', $this->dProv,  PDO::PARAM_STR);
+                $stmt->bindParam(':idEve', $this->idEve,  PDO::PARAM_STR);
+                $stmt->execute();
+            }catch  (Exception $e){
+                die("Error en el registro: " . $e->getMessage());
+            }
         }else{
             $conexion -> ejecutarConsulta($eventoDAO -> actualizarSIM());
         }
-        echo $eventoDAO -> actualizar();
         $conexion -> cerrarConexion();
     }
     public function eliminar(){

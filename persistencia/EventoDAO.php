@@ -94,7 +94,7 @@
                         imagenEve = :imagenEve,
                         idLug = :idLug,
                         dProv = :dProv
-                    WHERE idEvento = :idEvento
+                    WHERE idEve = :idEve
                     ";
             /*
             return "UPDATE

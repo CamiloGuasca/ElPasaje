@@ -60,14 +60,19 @@
             $fechaFin = $_POST["fechaFinAct"];
             $precioBas = $_POST["preciobAct"];
             $lugarReg = $_POST["idlugarAct"];
-            $imagenReg = null;
-            if (isset($_FILES['imagenReg']) && $_FILES['imagenReg']['error'] === 0) {
-                // Procesar la imagen
-                $imagen = file_get_contents($_FILES['imagenReg']['tmp_name']);
-            } else {
-                echo "No se ha subido ningún archivo o ha ocurrido un error al cargar.";
+            $imagenAct = null;
+            if(isset($_FILES["imagenAct"]) && $_FILES["imagenAct"]["error"] === UPLOAD_ERR_OK){
+                $rutaLocal = $_FILES["imagenAct"]["tmp_name"]; 
+                $tipoArchivo = mime_content_type($rutaLocal);
+                $imagenAct = file_get_contents($rutaLocal);
+        
+                // Validar tipo de archivo
+                if (!in_array($tipoArchivo, ['image/jpeg', 'image/png', 'image/gif'])) {
+                    die("Tipo de archivo no válido.");
+                } 
             }
-            $even = new Evento($idevento, $nombreBoleta,  $fechaInicio, $fechaFin, $precioBas, $imagenReg, $lugarReg, $id);
+    
+            $even = new Evento($idevento, $nombreBoleta,  $fechaInicio, $fechaFin, $precioBas, $imagenAct, $lugarReg, $id);
             $even -> actualizar();
         }elseif($_POST["opcion"] == "eliminar"){
             $idevento = $_POST["idEveElim"];
@@ -208,8 +213,8 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="imagenReg" class="form-label">Imagen del Evento</label>
-                                    <input type="file" name = "imagenReg" class="form-control" id="imagenReg">
+                                    <label for="imagenAct" class="form-label">Imagen del Evento</label>
+                                    <input type="file" name = "imagenAct" class="form-control" id="imagenAct">
                                 </div>
                         </div>
 
