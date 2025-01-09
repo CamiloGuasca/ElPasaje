@@ -166,6 +166,22 @@
                         dProv = ".$this -> dProv."
                     ";
         }
+        public function conPNS($filtro){
+            return "SELECT 
+                        idEve,
+                        nombreEve,
+                        fechIniEve,
+                        fechFinEve,
+                        precioEve,
+                        imagenEve,
+                        idLug,
+                        dProv
+                    FROM 
+                        eventos 
+                    WHERE nombreEve 
+                        LIKE '%".$filtro."%'
+                    ";
+        }
 
     }
 ?>

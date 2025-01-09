@@ -5,7 +5,7 @@
 		header("Location: ?pid=" . base64_encode("presentacion/sinPermiso.php"));
 	}
     $cliente = new Cliente($id);
-	$cliente -> consId();
+	$cliente = $cliente -> consId();
 ?>
 <nav class="navbar navbar-expand-lg custom-btn bg-body-tertiary">
 	<div class="container">
@@ -45,6 +45,7 @@
 		</div>
 	</div>
 </nav>
+
 <?php
 	$carrito = new CarritoCompra();
 	$carrito -> setIdCli($id);
@@ -59,7 +60,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
         </div>
             <div class="modal-body">
-            <body class="bg-light">
+            <body>
 				<!-- Items del Carrito -->
 				<div class="cart-items">
 				<?php

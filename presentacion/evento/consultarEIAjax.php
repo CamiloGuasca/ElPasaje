@@ -1,8 +1,9 @@
-<div class="container mt-5">
-    <div class="mb-3">
-        <input type="text" id="filtro" class="form-control" placeholder="Buscar">
-    </div>
-    <div id="resultado">
+<?php
+    $filtro = $_GET["filtro"];
+    $evento = new Evento();
+    $eventos = $evento ->conPNS($filtro);
+?>
+<div id="resultado">
 	<div class="row mb-3">
 		<div class="col">
 			<div class="">
@@ -11,8 +12,6 @@
 				<div class="">
     					<?php
                             $i = 0;
-                            $evento = new Evento();
-                            $eventos = $evento->consTod();
                             foreach ($eventos as $eventoActual) {
                                 if ($i % 4 == 0) {
                                     echo "<div class='row mb-3'>";
@@ -47,16 +46,3 @@
 		</div>
 	</div>
     </div>
-</div>
-<script>
-    $(document).ready(function(){
-        $("#filtro").keyup(
-            function(){
-                let filtro = encodeURIComponent($("#filtro").val());
-                url = "indexAjax.php?pid=<?php echo base64_encode("presentacion/evento/consultarEIAjax.php")?>&filtro="+filtro;
-                console.log("URL: ",url)
-                $("#resultado").load(url);
-            }
-        );
-    });
-</script>

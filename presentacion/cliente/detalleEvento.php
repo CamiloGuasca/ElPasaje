@@ -61,37 +61,49 @@
 						$tipoboleta = new TipoBoleta($detallevent->getIdTB());
 						$tipoboleta = $tipoboleta -> conTipBol();
 						$direccion = base64_encode('presentacion/cliente/detalleEvento.php');
-						echo "
+						if($detallevent->getCantidad() == 0){
+							echo "
 						<div class='card shadow-sm'>
 						<div class='card-body d-flex justify-content-between align-items-center'>
 							<div>
 							<h5 class='mb-0'>".$tipoboleta->getNombreTB()."</h5>
-							<small class='text-muted'>".$evento->getFechIniEve()."</small>
-							<p class='mb-0'><strong>".$evento -> getIdLug() -> getDireccionLug()."</strong></p>
-							<p class='mb-0 text-muted'>".$evento -> getIdLug() -> getNombreLug()."</p>
-							</div>
-							<div class='text-end'>
-							<p class='mb-0'><strong>Valor $".(($evento->getPrecioEve()*$tipoboleta->getPorcentajeTB())/100)+$evento->getPrecioEve()."</strong></p>
-							<br>
-							<button type='button' class='btn custom-btn' data-bs-toggle='modal' data-bs-target='#comprar'
-								data-idbol='".$detallevent->getIdTB()."'
-								data-nombol='".$tipoboleta->getNombreTB()."'
-								data-valor='".(($evento->getPrecioEve()*$tipoboleta->getPorcentajeTB())/100)+$evento->getPrecioEve()."'
-								data-opcion='montar'
-							>
-  								<i class='bi bi-cart-fill'></i> Montar
-							</button>
-							<button type='button' class='btn custom-btn' data-bs-toggle='modal' data-bs-target='#comprar'
-								data-idbol='".$detallevent->getIdTB()."'
-								data-nombol='".$tipoboleta->getNombreTB()."'
-								data-valor='".(($evento->getPrecioEve()*$tipoboleta->getPorcentajeTB())/100)+$evento->getPrecioEve()."'
-								data-opcion='comprar'
-							>
-  								<i class='bi bi-cash'></i> Comprar
-							</button>
+							<h3>No Hay Boletas Disponibles</h3>
 							</div>
 						</div>
 						";
+						}else{
+							echo "
+							<div class='card shadow-sm'>
+							<div class='card-body d-flex justify-content-between align-items-center'>
+								<div>
+								<h5 class='mb-0'>".$tipoboleta->getNombreTB()."</h5>
+								<small class='text-muted'>".$evento->getFechIniEve()."</small>
+								<p class='mb-0'><strong>".$evento -> getIdLug() -> getDireccionLug()."</strong></p>
+								<p class='mb-0 text-muted'>".$evento -> getIdLug() -> getNombreLug()."</p>
+								</div>
+								<div class='text-end'>
+								<p class='mb-0'><strong>Valor $".(($evento->getPrecioEve()*$tipoboleta->getPorcentajeTB())/100)+$evento->getPrecioEve()."</strong></p>
+								<br>
+								<button type='button' class='btn custom-btn' data-bs-toggle='modal' data-bs-target='#comprar'
+									data-idbol='".$detallevent->getIdTB()."'
+									data-nombol='".$tipoboleta->getNombreTB()."'
+									data-valor='".(($evento->getPrecioEve()*$tipoboleta->getPorcentajeTB())/100)+$evento->getPrecioEve()."'
+									data-opcion='montar'
+								>
+									<i class='bi bi-cart-fill'></i> Montar
+								</button>
+								<button type='button' class='btn custom-btn' data-bs-toggle='modal' data-bs-target='#comprar'
+									data-idbol='".$detallevent->getIdTB()."'
+									data-nombol='".$tipoboleta->getNombreTB()."'
+									data-valor='".(($evento->getPrecioEve()*$tipoboleta->getPorcentajeTB())/100)+$evento->getPrecioEve()."'
+									data-opcion='comprar'
+								>
+									<i class='bi bi-cash'></i> Comprar
+								</button>
+								</div>
+							</div>
+							";
+						}
 					}
 				?>
 				</div>
@@ -150,7 +162,6 @@
 			var valor = button.data('valor');
 			var opcion = button.data('opcion');
 
-			console.log("AAAA ",opcion);
 			$(this).find('#tipbol').val(tpbol);
 			$(this).find('#nombreBol').val(nombol);
 			$(this).find('#precioBol').val(valor);

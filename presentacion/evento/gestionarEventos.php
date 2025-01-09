@@ -229,7 +229,7 @@
                                     <div class="card text-bg-light">
                                         <div class="card-body">
                                             <div class="text-center">
-                                                <img id="modalimage" width="100%" src="" alt="Vista previa" class="img-fluid">
+                                                <img id="cargarAct" width="100%" src="" alt="Vista previa" class="img-fluid">
                                             </div>
                                             <a href="#">Rock al parque</a><br>
                                             Fecha: 00/00/0000<br>
@@ -382,8 +382,8 @@
 
         $(document).ready(function(){
             $("#filtro").keyup(function(){
-                url = "indexAjax.php?pid=<?php echo base64_encode("presentacion/evento/consultarEvento.php") ?>&filtro=" + $("#filtro").val() + "&id=<?php echo $id; ?>";
-                console.log("URL: ",url);
+                let filtro = encodeURIComponent($("#filtro").val());
+                url = "indexAjax.php?pid=<?php echo base64_encode("presentacion/evento/consultarEvento.php") ?>&filtro=" + filtro + "&id=<?php echo $id; ?>";
                 $("#resultado").load(url);
             });
         });
@@ -415,7 +415,7 @@
                 $(this).find('#fechaFinAct').val(fechFinEve);
                 $(this).find('#preciobAct').val(precioEve);
                 $(this).find('#idlugarAct').val(idLug);
-                $(this).find('#modalimage').attr('src', imagen);
+                $(this).find('#cargarAct').attr('src', imagen);
                 $(this).find('#mensaje').html(contex);
             });
         });
@@ -489,7 +489,7 @@
         }
         document.getElementById('imagenReg').addEventListener('change', function(event) {
             const file = event.target.files[0];
-            const preview = document.getElementById('previewImage');
+            const preview = document.getElementById('cargar');
 
             if (file) {
                 const reader = new FileReader();
@@ -504,7 +504,7 @@
         });
         document.getElementById('imagenAct').addEventListener('change', function(event) {
             const file = event.target.files[0];
-            const preview = document.getElementById('cargar');
+            const preview = document.getElementById('cargarAct');
 
             if (file) {
                 const reader = new FileReader();

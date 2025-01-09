@@ -6,6 +6,7 @@
 	}
 	$cliente = new Cliente($id);
 	$cliente -> consId();
+	
 	include ("presentacion/encabezado.php");
 	include ("presentacion/menuCliente.php");
 	include ("presentacion/evento/consultaEventoInicio.php");

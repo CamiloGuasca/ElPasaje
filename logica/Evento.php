@@ -227,5 +227,22 @@ class Evento {
 
         return $eventos;
     }
+    public function conPNS($filtro){
+        $eventos = array();
+        $conexion = new Conexion();
+        $conexion -> abrirConexion();
+        $eventoDAO = new EventoDAO();
+        $eventoDAO -> setDProv($this->dProv);
+        $conexion -> ejecutarConsulta($eventoDAO -> conPNS($filtro));
+        while ($registro = $conexion -> siguienteRegistro()) {
+            $lugar = new Lugar($registro[6]);
+            $lugar = $lugar->consId();
+            $proveedor = new Proveedor($registro[7]);
+            $proveedor = $proveedor->consId();
+            $evento = new Evento($registro[0], $registro[1], $registro[2], $registro[3], $registro[4], $registro[5], $lugar, $proveedor);
+            array_push($eventos, $evento);
+        }
+        return $eventos;
+    }
 }
 ?>
