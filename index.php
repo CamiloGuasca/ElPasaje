@@ -23,7 +23,8 @@ $paginasConSesion = array(
     "presentacion/evento/gestionarEventos.php",
     "presentacion/boleta/gestionarBoleta.php",
     "presentacion/cliente/detalleEvento.php",
-    "presentacion/cliente/facturasCliente.php"
+    "presentacion/cliente/facturasCliente.php",
+    "presentacion/cliente/pasarelaPago.php"
 );
 
 ?>

@@ -88,6 +88,7 @@
 									data-idbol='".$detallevent->getIdTB()."'
 									data-nombol='".$tipoboleta->getNombreTB()."'
 									data-valor='".(($evento->getPrecioEve()*$tipoboleta->getPorcentajeTB())/100)+$evento->getPrecioEve()."'
+									data-idtb='".$tipoboleta->getIdTB()."'
 									data-opcion='montar'
 								>
 									<i class='bi bi-cart-fill'></i> Montar
@@ -96,6 +97,7 @@
 									data-idbol='".$detallevent->getIdTB()."'
 									data-nombol='".$tipoboleta->getNombreTB()."'
 									data-valor='".(($evento->getPrecioEve()*$tipoboleta->getPorcentajeTB())/100)+$evento->getPrecioEve()."'
+									data-idtb='".$tipoboleta->getIdTB()."'
 									data-opcion='comprar'
 								>
 									<i class='bi bi-cash'></i> Comprar
@@ -120,9 +122,12 @@
           <h5 class="modal-title" id="exampleModalLabel">Confirma tu Compra</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form method="post" action='?pid=<?php echo base64_encode('presentacion/cliente/detalleEvento.php') ?>&ideve="<?php echo $ideve?>"'>
-            <input type="hidden" name="opcionBol" id="opcionBol" value="">
+        <form method="post" action='?pid=<?php echo base64_encode('presentacion/cliente/pasarelaPago.php') ?>&ideve="<?php echo $ideve?>"'>
+			<input type="hidden" name="validar" value="algo">
+            <input type="hidden" name="idEven" value="<?php echo $decoide?>">
+			<input type="hidden" name="opcionBol" id="opcionBol" value="">
 			<input type="hidden" name="tipbol" id="tipbol">
+			<input type="hidden" name="idtb" id="idtb">
             <div class="modal-body">
                 <div class="mb-3">
                     <label for="nombreEve" class="form-label">Evento</label>
@@ -161,11 +166,13 @@
 			var nombol = button.data('nombol');
 			var valor = button.data('valor');
 			var opcion = button.data('opcion');
+			var idtb = button.data('idtb');
 
 			$(this).find('#tipbol').val(tpbol);
 			$(this).find('#nombreBol').val(nombol);
 			$(this).find('#precioBol').val(valor);
 			$(this).find('#opcionBol').val(opcion);
+			$(this).find('#idtb').val(idtb);
 		});
 	});
 </script>

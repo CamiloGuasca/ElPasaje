@@ -61,6 +61,7 @@
             $conexion -> abrirConexion();
             $tipoboletadao = new TipoBoletaDAO($this -> idTB);
             $conexion -> ejecutarConsulta($tipoboletadao -> conTipBol());
+            #echo $tipoboletadao -> conTipBol();
             $registro = $conexion -> siguienteRegistro();
             $tipoboleta = new TipoBoleta($this -> idTB, $registro[0], $registro[1]);
             $conexion -> cerrarConexion();
