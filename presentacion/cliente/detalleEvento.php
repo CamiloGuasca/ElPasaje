@@ -6,12 +6,30 @@
 	}
 	$cliente = new Cliente($id);
 	$cliente -> consId();
-	include ("presentacion/encabezado.php");
-	include ("presentacion/menuCliente.php");
 	$decoide = null;
 	if(isset($_GET["ideve"])){
 		$decoide = base64_decode($_GET["ideve"]);
 	}
+	if(isset($_POST["opcionBol"])){
+		if($_POST["opcionBol"] == "comprar"){
+			/*
+			$facve = new FacturaVenta(null, null,null,$decoide, $id);
+			$idfac = $facve -> registrar();
+			$detfac = new DetalleFactura(null, $idfac, $idTP, $cantidad);
+			$detfac -> registrar();*/
+			$idTP = $_POST["tipbol"];
+			$cantidad = $_POST["cantidadBol"];
+			header("Location: ?pid=".base64_encode("presentacion/cliente/pasarelaPago.php")."&decoide=".$decoide."&cantidad=".$cantidad."&idTP=".$idTP."&cantidad=".$cantidad."&validar=".$cantidad);
+		}elseif($_POST["opcionBol"] == "montar"){
+			$idTP = $_POST["tipbol"];
+			$cantidad = $_POST["cantidadBol"];
+			$carrcomp = new CarritoCompra(null, $id, $idTP, $decoide,$cantidad);
+			$carrcomp -> registrar();
+		}
+	}
+	include ("presentacion/encabezado.php");
+	include ("presentacion/menuCliente.php");
+
 	
 	$evento = new Evento($decoide);
 	$evento = $evento -> consId();
@@ -22,25 +40,11 @@
 	$detallevento -> setIdEve($decoide);
 	$detalleseve = $detallevento -> consIdEve();
 
-	if(isset($_POST["opcionBol"])){
-		if($_POST["opcionBol"] == "comprar"){
-			$facve = new FacturaVenta(null, null,null,$decoide, $id);
-			$idfac = $facve -> registrar();
-			$idTP = $_POST["tipbol"];
-			$cantidad = $_POST["cantidadBol"];
-			$detfac = new DetalleFactura(null, $idfac, $idTP, $cantidad);
-			$detfac -> registrar();
-		}elseif($_POST["opcionBol"] == "montar"){
-			$idTP = $_POST["tipbol"];
-			$cantidad = $_POST["cantidadBol"];
-			$carrcomp = new CarritoCompra(null, $id, $idTP, $decoide,$cantidad);
-			$carrcomp -> registrar();
-		}
-	}
+
 ?>
 
 	</style>
- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
     <div class="container my-5 " style="max-width: 60%;">
         <div class="row">
             <!-- Columna Izquierda -->
@@ -115,49 +119,49 @@
     </div>
 
 	  <!-- Modal  Compra-->
-	  <div class="modal fade" id="comprar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered"> <!-- Clase para centrar el modal -->
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Confirma tu Compra</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form method="post" action='?pid=<?php echo base64_encode('presentacion/cliente/pasarelaPago.php') ?>&ideve="<?php echo $ideve?>"'>
-			<input type="hidden" name="validar" value="algo">
-            <input type="hidden" name="idEven" value="<?php echo $decoide?>">
-			<input type="hidden" name="opcionBol" id="opcionBol" value="">
-			<input type="hidden" name="tipbol" id="tipbol">
-			<input type="hidden" name="idtb" id="idtb">
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label for="nombreEve" class="form-label">Evento</label>
-                    <input type="text" name = "nombreEve" class="form-control" id="nombreEve" value="<?php echo $evento->getNombreEve()?>" disabled>
-                </div>
-                <div class="mb-3">
-                    <label for="fecha" class="form-label">Fecha</label>
-                    <input type="date" name = "fecha" class="form-control" id="fecha" value="<?php echo $evento->getFechIniEve()?>" disabled>
-                </div>
-				<div class="mb-3">
-                    <label for="nombreBol" class="form-label">Producto</label>
-                    <input type="text" name = "nombreBol" class="form-control" id="nombreBol" disabled>
-                </div>
-				<div class="mb-3">
-                    <label for="precioBol" class="form-label">Precio</label>
-                    <input type="text" name = "precioBol" class="form-control" id="precioBol"  disabled>
-                </div>
-				<div class="mb-3">
-                    <label for="cantidadBol" class="form-label">Confirma la Cantidad</label>
-                    <input type="number" name = "cantidadBol" class="form-control" id="cantidadBol">
-                </div>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary">Comprar</button>
-            </div>
-        </form>
-      </div>
-    </div>
-  </div>
+		<div class="modal fade" id="comprar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered"> <!-- Clase para centrar el modal -->
+		<div class="modal-content">
+			<div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Confirma tu Compra</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<form method="post" action='?pid=<?php echo base64_encode('presentacion/cliente/detalleEvento.php') ?>&ideve="<?php echo $ideve?>"'>
+				<input type="hidden" name="validar" value="algo">
+				<input type="hidden" name="idEven" value="<?php echo $decoide?>">
+				<input type="hidden" name="opcionBol" id="opcionBol" value="">
+				<input type="hidden" name="tipbol" id="tipbol">
+				<input type="hidden" name="idtb" id="idtb">
+				<div class="modal-body">
+					<div class="mb-3">
+						<label for="nombreEve" class="form-label">Evento</label>
+						<input type="text" name = "nombreEve" class="form-control" id="nombreEve" value="<?php echo $evento->getNombreEve()?>" disabled>
+					</div>
+					<div class="mb-3">
+						<label for="fecha" class="form-label">Fecha</label>
+						<input type="date" name = "fecha" class="form-control" id="fecha" value="<?php echo $evento->getFechIniEve()?>" disabled>
+					</div>
+					<div class="mb-3">
+						<label for="nombreBol" class="form-label">Producto</label>
+						<input type="text" name = "nombreBol" class="form-control" id="nombreBol" disabled>
+					</div>
+					<div class="mb-3">
+						<label for="precioBol" class="form-label">Precio</label>
+						<input type="text" name = "precioBol" class="form-control" id="precioBol"  disabled>
+					</div>
+					<div class="mb-3">
+						<label for="cantidadBol" class="form-label">Confirma la Cantidad</label>
+						<input type="number" name = "cantidadBol" class="form-control" id="cantidadBol">
+					</div>
+				</div>
+				<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+				<button type="submit" class="btn btn-primary">Comprar</button>
+				</div>
+			</form>
+		</div>
+		</div>
+	</div>
 <script>
 	$(document).ready(function(){
 		$('#comprar').on('show.bs.modal', function(event){

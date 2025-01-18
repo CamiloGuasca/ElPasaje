@@ -200,7 +200,6 @@ class Evento {
         $conexion -> abrirConexion();
         $eventoDAO = new EventoDAO($this -> idEve,null,null,null,null,null,null,null);
         $conexion -> ejecutarConsulta($eventoDAO -> consId());
-        echo $eventoDAO -> consId();
         $registro = $conexion -> siguienteRegistro();
         $lugar = new Lugar($registro[5]);
         $lugar = $lugar = $lugar->consId();

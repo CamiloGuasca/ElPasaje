@@ -7,6 +7,14 @@
     $cliente = new Cliente($id);
 	$cliente = $cliente -> consId();
 ?>
+    <style>
+        .btn-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+    </style>
 <nav class="navbar navbar-expand-lg custom-btn bg-body-tertiary">
 	<div class="container">
 		<a class="navbar-brand" href='?pid=<?php echo base64_encode("presentacion/sesionCliente.php")?>'><img src="img/boleto.png" width="50" /></a>
@@ -64,12 +72,12 @@
 				<!-- Items del Carrito -->
 				<div class="cart-items">
 				<?php
-					$total = null;
+					$tt = null;
 					$ru = "action='?pid=" . base64_encode('presentacion/sesionCliente.php') . "'";
 					foreach($carritos as $carrit){
 						$precio = (($carrit->getIdEve()->getPrecioEve()*$carrit->getIdTB()->getPorcentajeTB())/100)+$carrit->getIdEve()->getPrecioEve();
 						$totalPr = $precio*$carrit->getCantidad();
-						$total += $totalPr;
+						$tt += $totalPr;
 						echo "
 								<div class='d-flex justify-content-between align-items-center border-bottom py-2'>
 								<div>
@@ -92,7 +100,7 @@
 				</div>
 				<!-- Total -->
 				<div class="mt-4 text-end">
-					<h5>Total: $<?php echo $total?></h5>
+					<h5>Total: $<?php echo $tt?></h5>
 				</div>
         </div>
             <div class="modal-footer">
@@ -105,3 +113,7 @@
       </div>
     </div>
   </div>
+<button class="btn custom-btn btn-float" data-bs-toggle="modal" data-bs-target="#carrito">
+    <i class="bi bi-cart"></i>
+	Carrito
+</button>
