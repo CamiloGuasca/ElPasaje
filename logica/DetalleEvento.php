@@ -77,6 +77,15 @@
             $conexion -> ejecutarConsulta($detalleDAO->eliminarIdEve());
             $conexion -> cerrarConexion();
         }
+        public function conTotVol(){
+            $conexion = new Conexion();
+            $conexion -> abrirConexion();
+            $detalleDAO = new DetalleEventoDAO();
+            $detalleDAO -> setIdEve($this -> idEve);
+            $conexion -> ejecutarConsulta($detalleDAO->conTotVol());
+            $registro = $conexion -> siguienteRegistro();
+            return $registro[0];
+        }
     }
 
 ?>

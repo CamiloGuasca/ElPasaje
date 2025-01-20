@@ -31,13 +31,17 @@
                         $detallevento -> setIdEve($evento -> getIdEve());
                         $deteventos = $detallevento -> consIdEve();
                         $con = 0;
+                        $estadis = null;
                         $texto = "";
                         foreach($deteventos as $detevento){
                             $tipoboleta = new TipoBoleta($detevento -> getIdTB());
                             $tipoboleta = $tipoboleta -> conTipBol();
                             $texto = $texto. "data-dete".$con."='Nombre: ".$tipoboleta->getNombreTB()." - Porcentaje: ".$tipoboleta->getPorcentajeTB()." - Cantidad: ".$detevento->getCantidad()."'";
+                            $volRes = $detevento->conTotVol() - $detevento->getCantidad();
+                            $estadis = $estadis."data-volc".$con."='".$detevento->getCantidad()."'data-volr".$con."='".$volRes."' data-tpb".$con."='".$tipoboleta->getNombreTB()."'";
                             $con++;
                         }
+                        $estadis = $estadis."data-tode='".$con."'";
                         echo "
                         <tr>
                             <td>".$evento -> getIdEve()."</td>
@@ -63,7 +67,12 @@
                                     data-ideve='".$evento -> getIdEve()."'
                                 >
                                     <i class='fas fa-times'></i>
-                                </button>                                      
+                                </button>    
+                                <button type = 'button' class = 'btn btn-success' data-bs-toggle = 'modal' data-bs-target = '#estadisticas'
+                                    ".$estadis."
+                                >
+                                <i class='bi bi-bar-chart-fill'></i>
+                                </button>                                   
                             </td>         
                         </tr>
                     ";

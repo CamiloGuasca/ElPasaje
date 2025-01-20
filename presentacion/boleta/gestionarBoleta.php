@@ -19,8 +19,8 @@
             $nomBoleta = $_POST["nombreBol"];
             $porcentajeBoleta = $_POST["porcentajeBol"];
             $boleta = new TipoBoleta(null, $nomBoleta, $porcentajeBoleta, $id);
-            header("Location: ?pid=".base64_encode("presentacion/boleta/gestionarBoleta.php"));
             $boleta -> registrar();
+            header("Location: ?pid=".base64_encode("presentacion/evento/gestionarEventos.php"));
         }elseif($_POST["opcion"] == "actualizar"){
             $nomBoleta = $_POST["nombreBolReg"];
             $porcentajeBoleta = $_POST["porcentajeBolReg"];

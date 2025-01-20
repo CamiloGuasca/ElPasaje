@@ -50,6 +50,7 @@
             $conexion -> abrirConexion();
             $detfacDAO = new DetalleFacturaDAO(null, $this->idFacturaVenta, $this->idTB, $this->cantidad);
             $conexion -> ejecutarConsulta($detfacDAO -> registrar());
+            echo $detfacDAO -> registrar();
             $this -> idDF = $conexion -> obtenerLlaveAutonumerica();
             $conexion -> cerrarConexion();
         }

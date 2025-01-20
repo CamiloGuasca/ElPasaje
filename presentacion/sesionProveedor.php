@@ -12,8 +12,8 @@ include ("presentacion/menuProveedor.php");
 <div class="container">
 	<div class="row mb-3">
 		<div class="col">
-			<div class="card border-primary">
-				<div class="card-header text-bg-info">
+			<div class="card">
+				<div class="card-header">
 					<h4>Proveedor</h4>
 				</div>
 				<div class="card-body">

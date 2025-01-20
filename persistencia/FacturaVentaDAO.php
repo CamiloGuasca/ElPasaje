@@ -78,5 +78,16 @@
                             idCli = ".$this -> idCli."
                 ";
             }
+            public function ultid(){
+                return "SELECT 
+                            idFacturaVenta,
+                            fechaFV,
+                            horaFV,
+                            idEve,
+                            idCli 
+                        FROM facturaventa 
+                        ORDER BY idFacturaVenta DESC LIMIT 1
+                        ";
+            }
         }
 ?>

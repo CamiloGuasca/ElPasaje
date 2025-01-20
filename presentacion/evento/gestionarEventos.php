@@ -14,9 +14,7 @@
     $tipoboleta -> setProveedoresIdProv($id);
     $tiposboletas = $tipoboleta-> consId();
 
-    include("presentacion/encabezado.php");
-    include("presentacion/menuProveedor.php");
-    
+ 
     if(isset($_POST["opcion"])){
         if($_POST["opcion"] == "registro"){
             $nombreBoleta = $_POST["nombreReg"];
@@ -48,6 +46,7 @@
                         $value = $values['value'];
                         $detallevento = new DetalleEvento(null, $ideve, $id, $value);
                         $detallevento->registro();
+                        header("Location: ?pid=".base64_encode("presentacion/evento/gestionarEventos.php"));
                     }
                 }
            // } else {
@@ -74,6 +73,7 @@
     
             $even = new Evento($idevento, $nombreBoleta,  $fechaInicio, $fechaFin, $precioBas, $imagenAct, $lugarReg, $id);
             $even -> actualizar();
+            header("Location: ?pid=".base64_encode("presentacion/evento/gestionarEventos.php"));
         }elseif($_POST["opcion"] == "eliminar"){
             $idevento = $_POST["idEveElim"];
             $even = new Evento($idevento);
@@ -81,8 +81,13 @@
             $detalleven -> setIdEve($idevento);
             $detalleven -> eliminarIdEve();
             $even -> eliminar();
+            header("Location: ?pid=".base64_encode("presentacion/evento/gestionarEventos.php"));
         }
     }
+
+    include("presentacion/encabezado.php");
+    include("presentacion/menuProveedor.php");
+    
 ?>
 
 <!-- Incluir Font Awesome -->
@@ -126,12 +131,17 @@
                         $deteventos = $detallevento -> consIdEve();
                         $con = 0;
                         $texto = "";
+                        $estadis = null;
+                        $del = null;
                         foreach($deteventos as $detevento){
                             $tipoboleta = new TipoBoleta($detevento -> getIdTB());
                             $tipoboleta = $tipoboleta -> conTipBol();
                             $texto = $texto. "data-dete".$con."='Nombre: ".$tipoboleta->getNombreTB()." - Porcentaje: ".$tipoboleta->getPorcentajeTB()." - Cantidad: ".$detevento->getCantidad()."'";
+                            $volRes = $detevento->conTotVol() - $detevento->getCantidad();
+                            $estadis = $estadis."data-volc".$con."='".$detevento->getCantidad()."'data-volr".$con."='".$volRes."' data-tpb".$con."='".$tipoboleta->getNombreTB()."'";
                             $con++;
                         }
+                        $estadis = $estadis."data-tode='".$con."'";
                         echo "
                         <tr>
                             <td>".$evento -> getIdEve()."</td>
@@ -157,7 +167,12 @@
                                     data-ideve='".$evento -> getIdEve()."'
                                 >
                                     <i class='fas fa-times'></i>
-                                </button>                                      
+                                </button>          
+                                <button type = 'button' class = 'btn btn-success' data-bs-toggle = 'modal' data-bs-target = '#estadisticas'
+                                    ".$estadis."
+                                >
+                                <i class='bi bi-bar-chart-fill'></i>
+                                </button>                            
                             </td>         
                         </tr>
                     ";
@@ -255,7 +270,7 @@
         </div>
     </div>
 
-    <div class="modal" tabindex="-1" id="eliminarEve">
+<div class="modal" tabindex="-1" id="eliminarEve">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -277,9 +292,26 @@
     </div>
     </div>
 
+<div class="modal" tabindex="-1" id="estadisticas">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Estadísticas</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div id='divEstadis'></div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </div>
+        </div>
+    </div>
+    </div>
     
     <div class="modal fade" id="registro" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="registroLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl"> <!-- Modal más ancho -->
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="registroLabel">Nuevo Evento </h5>
@@ -375,8 +407,7 @@
                 </form>
             </div>
         </div>
-    </div>
-    <!-- JavaScript -->     
+    </div>  
 
 <script>
 
@@ -388,10 +419,44 @@
             });
         });
         $(document).ready(function() {
-            // Cuando se abre el modal
+    $('#estadisticas').on('show.bs.modal', function(event) {
+            var contenedor = document.getElementById('divEstadis');
+            contenedor.innerHTML = '';
+            var button = $(event.relatedTarget);
+            var tode = button.data('tode');
+
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(function() {
+                for (var i = 0; i < tode; i++) {
+                    var divNuevo = document.createElement('div');
+                    divNuevo.id = 'graf' + i;
+                    divNuevo.style.width = '100%';
+                    divNuevo.style.height = '300px';
+                    contenedor.appendChild(divNuevo);
+                    
+                    drawChart(i); 
+                }
+            });
+
+            function drawChart(index) {
+                var data = google.visualization.arrayToDataTable([
+                    ['Tipo', 'Voleta'],
+                    ['En venta', button.data('volc' + index)],
+                    ['Vendidas', button.data('volr' + index)]
+                ]);
+                var options = {
+                    title: button.data('tpb'+index)
+                };
+                var chartPie = new google.visualization.PieChart(document.getElementById('graf' + index));
+                chartPie.draw(data, options);
+            }
+        });
+    });
+
+        $(document).ready(function() {
             $('#actualizar').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget); // Botón que activó el modal
-                var ideve = button.data('ideve');// Extraer datos de los atributos 'data-*'
+                var button = $(event.relatedTarget);
+                var ideve = button.data('ideve');
                 var nombreEve = button.data('nombreeve');
                 var fechIniEve = button.data('fechinieve');
                 var fechFinEve = button.data('fechfineve');
@@ -402,16 +467,16 @@
                 var idevento = button.data('idevento');
                 let tamanio = button.data("tamanio");
                 let contex = "";
-                //console.log("Tamaño ",tamanio);
+            
                 for(let i = 0; i<tamanio; i++){
                     let muestra = button.data("dete"+i);
                     console.log("dete",i);
                     contex += muestra+"<br>";
                 }
-                // Rellenar los campos del formulario en el modal con los datos extraídos
-                $(this).find('#ideventoAct').val(ideve); // Asumiendo que 'lugar' va en 'name'
-                $(this).find('#nombreAct').val(nombreEve); // Asumiendo que 'fecha_inicio' va en 'email'
-                $(this).find('#fechaInAct').val(fechIniEve); // Asumiendo que 'precio' va en 'message'
+                
+                $(this).find('#ideventoAct').val(ideve);
+                $(this).find('#nombreAct').val(nombreEve);
+                $(this).find('#fechaInAct').val(fechIniEve);
                 $(this).find('#fechaFinAct').val(fechFinEve);
                 $(this).find('#preciobAct').val(precioEve);
                 $(this).find('#idlugarAct').val(idLug);

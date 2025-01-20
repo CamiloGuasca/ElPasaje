@@ -81,5 +81,14 @@
             }
             return $factventas;
         }
+        public function ultid(){
+            $conexion = new Conexion();
+            $conexion -> abrirConexion();
+            $facvenDAO  = new FacturaVentaDAO();
+            $conexion -> ejecutarConsulta($facvenDAO->ultid());
+            $registro = $conexion -> siguienteRegistro();
+            $evento = new Evento($registro[0]);
+            return $registro[0];
+        }
     }
 ?>

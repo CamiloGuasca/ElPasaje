@@ -42,10 +42,11 @@
     }
         public function registroDE(){
             return "INSERT INTO
-                        detalleevento (idEve, idTB, Cantidad)
+                        detalleevento (idEve, idTB, Cantidad, CantidadTot)
                     VALUES
                         (".$this->idEve.", 
                          ".$this->idTB.",
+                         ".$this->cantidad.",
                          ".$this->cantidad.")
                     ";
         }
@@ -72,6 +73,15 @@
                         detalleevento
                     WHERE
                         idEve = ".$this -> idEve."
+                    ";
+        }
+        public function conTotVol(){
+            return "SELECT 
+                        CantidadTot
+                    FROM
+                        detalleevento
+                    WHERE
+                        idEve  = ".$this -> idEve."     
                     ";
         }
    } 

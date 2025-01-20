@@ -7,8 +7,9 @@ if($rol != "cliente"){
 $decoide = null;
 $cantidad = null;
 $idTP = null;
+
 if(!isset($_GET["validar"])){
-    header("Location: ?pid=".base64_encode("presentacion/sesionCliente.php"));
+   header("Location: ?pid=".base64_encode("presentacion/sesionCliente.php"));
 }else{
 
     $decoide = $_GET["decoide"];
@@ -16,12 +17,24 @@ if(!isset($_GET["validar"])){
     $idTP = $_GET["idTP"];
     
 }
+
+if(isset($_POST["decoide"])){
+    $decoide = $_POST["decoide"];
+    $cantidad = $_POST["cantidad"];
+    $idTP = $_POST["idTP"];
+}
+
+
 if(isset($_POST["decoide"])){
     $dec = $_POST["decoide"];
     $facve = new FacturaVenta(null, null,null,$dec, $id);
-	$idfac = $facve -> registrar();
-    $can = $_GET["cantidad"];
-    $idT = $_GET["idTP"];
+	$facve -> registrar();
+    $idfac = $facve -> ultid();
+    echo "idfac: ".$idfac."\n";
+    $can = $_POST["cantidad"];
+    echo "cantidad: ".$can."\n";
+    $idT = $_POST["idTP"];
+    echo "idtp: ".$idT."\n";
     $detfac = new DetalleFactura(null, $idfac, $idT, $can);
     $detfac -> registrar();
 }
@@ -123,7 +136,7 @@ $even = $even -> consId();
         <form method="post" action='?pid=<?php echo base64_encode('presentacion/cliente/pasarelaPago.php') ?>&ideve="<?php echo $ideve?>"'>
 			<input type="hidden" name="decoide" value="<?php echo $decoide?>">
             <input type="hidden" name="cantidad" value="<?php echo $cantidad?>">
-			<input type="hidden" name="idTP" id="opcionBol" value="<?php echo $opcionBol?>">
+			<input type="hidden" name="idTP" id="opcionBol" value="<?php echo $idTP?>">
             <div class="modal-body">
                 <div class="mb-3">
                 <label for="nombreEve" class="form-label">Nombre</label>
