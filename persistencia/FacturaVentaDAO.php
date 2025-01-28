@@ -101,5 +101,21 @@
                             idFacturaVenta = ".$this->idFacturaVenta." 
                        ";
             }
+            public function conFCF($filtro){
+                return "SELECT 
+                            fv.idFacturaVenta, 
+                            fv.fechaFV, 
+                            fv.horaFV, 
+                            fv.idEve, 
+                            fv.idCli 
+                        FROM facturaventa as fv
+                        INNER JOIN eventos as ev
+                            ON fv.idEve = ev.idEve
+                        WHERE
+                            ev.nombreEve LIKE '%".$filtro."%'
+                        AND
+                            fv.idCli = ".$this -> getIdCli().";
+                        ";
+            }
         }
 ?>

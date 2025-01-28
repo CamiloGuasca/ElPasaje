@@ -24,7 +24,7 @@
             <h3>Facturas</h3>
         </div>
         <div>
-            <input type="text" class="form-control mb-3">
+            <input type="text"  id="filtro" placeholder="Buscar" class="form-control mb-3">
         </div>
         <!-- Tabla -->
         <div id="resultado">
@@ -153,6 +153,14 @@
   </div>
 
 <script>
+    $(document).ready(function(){
+        $("#filtro").keyup(function(){
+            let filtro = encodeURIComponent($("#filtro").val());
+            url = "indexAjax.php?pid=<?php echo base64_encode("presentacion/cliente/facCliAjax.php")?>&filtro=" + filtro + "&id=<?php echo $id; ?>";
+            console.log(url);
+            $("#resultado").load(url);
+        });
+    });
     $(document).ready(function(){
         $('#modalImpresion').on('show.bs.modal', function(event){
             var button = $(event.relatedTarget);

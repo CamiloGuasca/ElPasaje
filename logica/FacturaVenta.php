@@ -101,5 +101,21 @@
             $facventa = new FacturaVenta($this->idFacturaVenta,$registro[0], $registro[1], $evento, $registro[2]);
             return $facventa;
         }
+        public function conFCF($filtro){
+            $factventas = array();
+            $conexion = new Conexion();
+            $conexion -> abrirConexion();
+            $facvenDAO  = new FacturaVentaDAO();
+            $facvenDAO -> setIdCli($this->idCli);
+            $conexion -> ejecutarConsulta($facvenDAO->conFCF($filtro));
+        
+            while($registro = $conexion -> siguienteRegistro()){
+                $evento = new Evento($registro[3]);
+                $evento = $evento -> consId();
+                $factventa = new FacturaVenta($registro[0],$registro[1], $registro[2],$evento, $this->idCli);
+                array_push( $factventas, $factventa);
+            }
+            return $factventas;
+        }
     }
 ?>

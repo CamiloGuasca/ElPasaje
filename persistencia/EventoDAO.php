@@ -163,7 +163,7 @@
                     WHERE nombreEve 
                         LIKE '%".$filtro."%'
                         AND
-                        dProv = ".$this -> dProv."
+                        dProv = ".$this -> dProv."  
                     ";
         }
         public function conPNS($filtro){
