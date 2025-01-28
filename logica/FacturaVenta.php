@@ -90,5 +90,16 @@
             $evento = new Evento($registro[0]);
             return $registro[0];
         }
+        public function confacId(){
+            $conexion = new Conexion();
+            $conexion -> abrirConexion();
+            $facvenDAO  = new FacturaVentaDAO($this->idFacturaVenta);
+            $conexion -> ejecutarConsulta($facvenDAO->confacId());
+            $registro = $conexion -> siguienteRegistro();
+            $evento = new Evento( $registro[2]);
+            $evento = $evento -> consId();
+            $facventa = new FacturaVenta($this->idFacturaVenta,$registro[0], $registro[1], $evento, $registro[2]);
+            return $facventa;
+        }
     }
 ?>

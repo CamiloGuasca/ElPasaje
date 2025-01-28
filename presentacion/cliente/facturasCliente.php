@@ -15,14 +15,19 @@
     $facvens = $facve -> consTod();
 ?>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<div>
+</div>
 <div id="contenido-general">
     <div class="container my-4">
         <!-- Botón adicional -->
         <div class="d-flex justify-content-between mb-3">
             <h3>Facturas</h3>
         </div>
-
+        <div>
+            <input type="text" class="form-control mb-3">
+        </div>
         <!-- Tabla -->
+        <div id="resultado">
         <table id="example" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
@@ -71,6 +76,7 @@
             </tbody>
         </table>
     </div>
+</div>
 </div>
       <!-- Modal de Bootstrap -->
   <div class="modal fade" id="modalImpresion" tabindex="-1" aria-labelledby="modalImpresionLabel" aria-hidden="true">
@@ -137,7 +143,10 @@
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary" onclick="imprimirModal()">Imprimir Factura</button>
+            <!--<button type="button" class="btn btn-primary" onclick="imprimirModal()">Imprimir Factura</button>!-->
+            <button id="imprimir-factura" style="color: white;" class="btn bg-primary">
+                Imprimir Factura
+            </button>
         </div>
       </div>
     </div>
@@ -148,6 +157,11 @@
         $('#modalImpresion').on('show.bs.modal', function(event){
             var button = $(event.relatedTarget);
             var idfv = button.data('idfv');
+            
+            $('#imprimir-factura').attr(
+                'onclick',
+                `window.open('?pid=<?php echo base64_encode('presentacion/cliente/genFacturaCli.php') ?>&idusu=<?php echo base64_encode($id) ?>&idfac=${btoa(idfv)}', '_blank')`
+            );
             var fecha = button.data('fecha');
             var producto =  button.data('producto');
             var cantidad = button.data('cantidad');

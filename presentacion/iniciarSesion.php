@@ -1,4 +1,4 @@
-w<?php
+<?php
 require_once("logica/Cliente.php");
 require_once("logica/Proveedor.php");
 $error = false;

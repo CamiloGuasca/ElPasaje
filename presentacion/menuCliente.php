@@ -24,14 +24,6 @@
 			aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<ul class="navbar-nav me-auto">
-				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
-					href="#" role="button" data-bs-toggle="dropdown"
-					aria-expanded="false">Carrito</a>
-					<ul class="dropdown-menu">
-                        <li><button type='button' class='dropdown-item' data-bs-toggle='modal' data-bs-target='#carrito'>Ver Carrito</button></li>
-					</ul></li>
-			</ul>
 		<div class="collapse navbar-collapse" id="navbarNavDropdown">
 			<ul class="navbar-nav me-auto">
 				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"

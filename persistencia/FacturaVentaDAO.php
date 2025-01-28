@@ -89,5 +89,17 @@
                         ORDER BY idFacturaVenta DESC LIMIT 1
                         ";
             }
+            public function confacId(){
+                return "SELECT
+                            fechaFV,
+                            horaFV,
+                            idEve,
+                            idCli
+                        FROM 
+                            facturaventa
+                        WHERE
+                            idFacturaVenta = ".$this->idFacturaVenta." 
+                       ";
+            }
         }
 ?>

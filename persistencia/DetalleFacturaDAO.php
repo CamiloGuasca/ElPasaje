@@ -64,5 +64,16 @@
                         detallefacturaventa
                     ";
         }
+        public function consDetFacFV(){
+            return "SELECT
+                        idDF,
+                        idTB,
+                        cantidadDFV
+                    FROM
+                        detallefacturaventa
+                    WHERE
+                        idFacturaVenta = ".$this->getIdFacturaVenta()."
+                    ";
+        }
     }
 ?>

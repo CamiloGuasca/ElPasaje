@@ -9,18 +9,6 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavDropdown">
 			<ul class="navbar-nav">
-				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
-					href="#" role="button" data-bs-toggle="dropdown"
-					aria-expanded="false"></a>
-		
-			</ul>
-			<ul class="navbar-nav me-auto">
-				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
-					href="#" role="button" data-bs-toggle="dropdown"
-					aria-expanded="false"></a>
-			
-			</ul>
-			<ul class="navbar-nav">
 				<li class="nav-item"><a href="?pid=<?php echo base64_encode("presentacion/registro.php") ?>" class="nav-link"
 					aria-disabled="true">Registrarse</a></li>
 			</ul>
